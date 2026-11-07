@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --obs: #08080A;
+  --stone: #EFDED9;
+  --verm: #FF3B1D;
+  --emer: #10B981;
+  --hair: #1F1F24;
+  --ink: #111111;
+  --ease-expo: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--obs);
+  color: var(--stone);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+a, button, [role="button"], input, textarea, select, label { cursor: none; }
+
+::selection { background: var(--verm); color: var(--obs); }
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--obs); }
+::-webkit-scrollbar-thumb { background: var(--verm); }
+
+/* Global noise overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+}
+
+/* Typography helpers */
+.font-display { font-family: 'Syne', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+.font-body { font-family: 'Inter', sans-serif; }
+
+/* Utility */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

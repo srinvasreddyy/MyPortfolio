@@ -1,0 +1,864 @@
+# Complete Master Profile – Srinivasa Reddy Sanikommu
+
+I've merged the information from your Gemini profile with everything you've previously shared with me. I've consolidated overlapping details, removed repetitions, expanded project descriptions where additional information was available, and organized everything into one profile.
+
+I've also preserved important details such as your academic background, internship, TCS offer, technical stack, projects, research, achievements, learning progress, career ambitions, and personal interests.
+
+# Srinivasa Reddy Sanikommu
+
+Aspiring Software Engineer | AI Engineer | Backend Developer
+
+B.Tech 2027
+
+CSE – AI & ML
+
+MERN Stack
+
+AI/ML Engineering
+
+Professional focus: Backend engineering, full-stack development, machine learning, deep learning, LLM applications, and autonomous AI agents.
+
+Career ambition: Build strong software engineering expertise and transition toward high-impact product engineering roles at companies such as Google, Atlassian, and Stripe.
+
+# 1. Personal and demographic information
+
+| Field                     | Details                                                                                                                |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Full name                 | Srinivasa Reddy Sanikommu                                                                                              |
+| Username / handle         | `srinvasreddyy`                                                                                                        |
+| Gender                    | Male                                                                                                                   |
+| Date of birth             | July 1, 2005                                                                                                           |
+| Age                       | 21 years (as of November 7, 2026)                                                                                      |
+| Current residence         | Guntur, Andhra Pradesh, India                                                                                          |
+| Hometown                  | Narasaraopet, Andhra Pradesh, India                                                                                    |
+| Email                     | sanikommusrinivasareddy2\@gmail.com                                                                                    |
+| LinkedIn                  | [linkedin.com/in/srinivasreddysanikommu2](https://www.linkedin.com/in/srinivasreddysanikommu2/?utm_source=chatgpt.com) |
+| GitHub username mentioned | `srinvasreddyy`                                                                                                        |
+| Academic identification   | Holds an APAAR (Automated Permanent Academic Account Registry) academic identification number                          |
+
+Online identity: You use the handle `srinvasreddyy` and have shared your LinkedIn profile. Your exact GitHub profile URL and other social account URLs have not yet been verified.
+
+# 2. Education history
+
+## Bachelor of Technology
+
+- Degree: Bachelor of Technology (B.Tech).
+- Branch: Computer Science and Engineering.
+- Specialization: Artificial Intelligence and Machine Learning.
+- Study period: 2023–2027.
+- Expected graduation: May 2027.
+- CGPA: 8.5 (reported in an earlier resume draft).
+
+College name clarification: Your latest Gemini profile identifies RVR & JC College of Engineering. In an earlier conversation, you asked to change the college name on your resume to Tirumala Engineering College. These are conflicting records, so the actual current institution needs confirmation before using this information in an official resume.
+
+## Intermediate education
+
+- Institution: Sri Chaitanya Junior College.
+- Location: Narasaraopet, Andhra Pradesh.
+- Stream: Mathematics, Physics and Chemistry (MPC).
+- Duration: 2021–2023.
+- Percentage: 95%.
+
+# 3. Career and professional experience
+
+## TCS Prime placement offer
+
+Tata Consultancy Services (TCS)
+
+Offer received
+
+# ₹9.09 LPA
+
+Position: TCS Prime – System Engineer
+
+Grade: C1
+
+Graduating batch: 2027
+
+Career interests: Software engineering, backend development and product engineering.
+
+You have also explored the following aspects of your TCS career:
+
+- TCS Prime compensation structure.
+- CTC versus monthly in-hand salary.
+- TCS Initial Learning Program (ILP).
+- Training compensation.
+- Taxation and deductions.
+- Career progression after joining TCS.
+- Switching from a service-based company to a product-based company.
+
+You previously mentioned a plan to work at TCS for approximately 1.5–2 years while preparing for opportunities at larger product companies. Your current joining status has not been confirmed.
+
+## Internship experience – KriBud Web Tech
+
+Position: MERN Backend Developer Intern
+
+Duration: August 2025 – March 2026
+
+Responsibilities and areas of work:
+
+- Backend development using the MERN stack.
+- REST API development and integration.
+- Database design and optimization.
+- API performance improvement.
+- Restaurant ordering workflows.
+- Dine-out and table reservation functionality.
+- Payment processing integrations.
+- Maps integration.
+- Managing backend application workflows.
+- Project coordination and backend development leadership.
+
+# 4. Technical skills and technology stack
+
+The following consolidates technologies you have used, studied, implemented, or explored. It does not imply equal proficiency in all of them.
+
+## Programming languages
+
+- Python
+- Java
+- C
+- JavaScript
+
+## Full-stack and web development
+
+| Category                  | Technologies                             |
+| ------------------------- | ---------------------------------------- |
+| Frontend                  | HTML, CSS, JavaScript, React.js, Next.js |
+| Backend                   | Node.js, Express.js, Flask               |
+| Styling                   | Tailwind CSS                             |
+| Frontend tooling          | Vite                                     |
+| API architecture          | REST APIs                                |
+| State and data management | TanStack React Query                     |
+| HTTP communication        | Axios                                    |
+| Authentication            | JWT, cookies, OAuth                      |
+| Real-time communication   | Stream Chat, GetStream.io                |
+
+## Databases and storage
+
+- MongoDB.
+- MongoDB Atlas.
+- Mongoose.
+- PostgreSQL.
+- Redis.
+- Pinecone and vector database concepts.
+- Database schema design.
+- MongoDB aggregation pipelines.
+- Database optimization.
+- Indexing and query performance.
+
+## Machine learning and deep learning
+
+- NumPy and Pandas.
+- Scikit-learn.
+- PyTorch.
+- Linear Regression.
+- Gaussian Naive Bayes.
+- Exploratory Data Analysis.
+- Data cleaning and preprocessing.
+- Correlation analysis.
+- Multicollinearity.
+- Classification and model evaluation.
+- Precision, Recall, F1-score and Accuracy.
+- Imbalanced dataset handling.
+- Class weighting and oversampling.
+- Convolutional Neural Networks (CNNs).
+- EfficientNet.
+- Vision Transformers (ViT).
+- Flask-based ML model serving.
+
+## AI engineering and LLM development
+
+You have explored the following concepts and technologies:
+
+- Large Language Models (LLMs).
+- Prompt engineering.
+- Structured outputs.
+- Pydantic-based output parsing.
+- Function calling and tool execution.
+- ReAct agent architecture.
+- Retrieval-Augmented Generation (RAG).
+- Text embeddings.
+- Vector databases.
+- LangChain.
+- LangGraph.
+- LangSmith.
+- Model integration through APIs.
+- Local LLM deployment.
+- AI agent orchestration.
+- MCP (Model Context Protocol).
+- Multi-agent systems.
+- Agent memory and conversation history.
+
+## AI models and providers explored
+
+| Tool / Model      | Area of interest                            |
+| ----------------- | ------------------------------------------- |
+| Ollama            | Local LLM deployment                        |
+| GLM 5.2           | API usage through OpenRouter                |
+| GLM 5.3           | Model capabilities and deployment           |
+| Qwen3 Coder       | AI-assisted coding                          |
+| Claude Opus       | Agentic development                         |
+| Groq              | Fast LLM API integration                    |
+| Gemini            | Generative AI API integration               |
+| OpenRouter        | Multi-model API access                      |
+| ChatGPT Codex CLI | Coding assistance and development workflows |
+
+## Developer tools and environments
+
+- Visual Studio Code.
+- Cursor AI.
+- Antigravity.
+- OpenCode.
+- Codex CLI.
+- Git.
+- GitHub.
+- Docker.
+- Vercel.
+- Hoppscotch.
+- Cloudinary.
+- Anaconda.
+- Conda.
+- Python virtual environments.
+- `uv` package and project manager.
+- Node.js and npm.
+
+## Documentation and typesetting
+
+- LaTeX.
+- Single-page technical resumes.
+- Academic technical reports.
+- Project design documentation.
+
+# 5. Professional certifications and training
+
+| Certification / Programme          | Organization     |
+| ---------------------------------- | ---------------- |
+| ReactJS Professional Certification | GeeksforGeeks    |
+| AWS Cloud                          | AWS Academy      |
+| Java Full Stack Training           | Wipro TalentNext |
+
+You have also participated in technical learning activities related to Python, AI/ML, backend development, and software engineering.
+
+# 6. Major projects and development work
+
+These projects combine the information from both profiles and earlier conversations. Related projects are listed separately where they are distinct applications.
+
+## 6.1 InsureAI – AI-powered health insurance premium prediction
+
+[Built a Healthcare Insurance Cost Prediction Model | Sandeep Chaurasiya posted on the topic | LinkedIn](https://images.openai.com/static-rsc-4/E0ZZjtTxViYbUnAdJRIWrplNkjj2OhI1LFPCMsPFhB2xVo035pnQum0irHcm8XCZs0P7pC97hEuDwXoIKBFCA6NHCHLi0g2yd3QaN9rg_w9K06LFOUgmlyw5CAP7A2P7Xig6ul1kYU615p2eSQ7DRsXE3T5laqIzILBaAyosSsY?purpose=inline)
+
+[linkedin.com](https://www.linkedin.com/posts/sandeep108_machinelearning-datascience-healthcareai-activity-7301134014545891329-a7QF?utm_source=chatgpt.com)
+
+Type: Full-stack MERN + Machine Learning application.
+
+Technology stack:
+
+- MongoDB.
+- Express.js.
+- React.js.
+- Node.js.
+- Flask.
+- Scikit-learn.
+- Linear Regression.
+
+Description:
+
+A full-stack application that integrates a machine learning service with a web application to estimate health insurance premiums.
+
+Key functionality:
+
+- User-facing web interface.
+- Backend API communication.
+- Machine learning predictions.
+- Flask-based model serving.
+- Integration between the MERN application and ML service.
+
+## 6.2 AgriSakha – Multimodal AI assistant for farmers
+
+[AI Crop Advisor React Native Expo App by Shakeel Ahmad on Dribbble](https://images.openai.com/static-rsc-4/YCkMvvwm7vs03ZyfGsdlFl2HpfDStVimhNwrpYaTvOe2buvZ2k05DyrZMrgiYO2_G7NQxrGTUkex7thhUQviPCXhGOYv_ozRR27pg_kqSlbUY-ysxSA99BE7xSmdaU2A4x6nxjAK1_kFaqKSMO590VIjlwzdTV17cuQTPqpQnJ0?purpose=inline)
+
+[dribbble.com](https://dribbble.com/shots/26821837-AI-Crop-Advisor-React-Native-Expo-App?utm_source=chatgpt.com)
+
+Type: AI-powered agricultural assistant.
+
+Description:
+
+A collaborative project designed to provide farmers with an intelligent assistant supporting different forms of user input.
+
+Key capabilities:
+
+- Text-based interaction.
+- Image-based input.
+- Voice-based input.
+- Multimodal AI assistance.
+- Agricultural information support.
+
+The objective is to make AI-based assistance more accessible to farmers through multiple interaction methods.
+
+## 6.3 Deepfake Detection – Research project
+
+Research title:
+
+A Cross-Attentional Fusion of Chrominance Frequency and Spatial Luminance for Deepfake Detection.
+
+Collaborators:
+
+- S. Dhana Sri.
+- V. Siri Chandana.
+- Srinivasa Reddy Sanikommu.
+
+Research area: Computer vision, image/video analysis and deepfake detection.
+
+Technical concepts involved:
+
+- Chrominance information.
+- Frequency-domain features.
+- Spatial luminance.
+- Cross-attentional feature fusion.
+- Deepfake detection.
+
+You have also worked on technical design documentation for video detection using SentinAI.
+
+This is an important research direction because it connects your computer vision and deep learning interests.
+
+## 6.4 EventSync AI – Event inventory and billing platform
+
+[Track.rent - Rental Software for Event Companies](https://images.openai.com/static-rsc-4/J0rjLyuqLmUaCdK6Fk3Sis1dnAtzfsK0sVgi40pHoLX4TMG3OPO45WRbCj3FOiIIz46zbnx2TAxKKPoCQ2k7frkHUN0123ZYc-qxDHHpsJuh1fFcUvmwk-9oP21lCm1ZcngEsTaVEISSfdkNqIsrCXegSPTDpAWOy5lpT88z6lo?purpose=inline)
+
+[track.rent](https://track.rent/?utm_source=chatgpt.com)
+
+Competition: TBO VoyageHack 3.0.
+
+Description:
+
+An event inventory management and billing platform focused on event operations and financial coordination.
+
+Key features:
+
+- Event inventory management.
+- Hybrid split-billing functionality.
+- Redis-based real-time room locking.
+- Automated contract attrition risk alerts.
+- Inventory and booking workflows.
+- Billing-related application logic.
+
+Technical interests demonstrated:
+
+- Real-time backend operations.
+- Redis.
+- Business workflow automation.
+- Risk monitoring.
+- Financial workflow management.
+
+## 6.5 OrderNow (Loksar) – Food, grocery and table reservation platform
+
+[Launch Your Own Delivery Marketplace in Days](https://images.openai.com/static-rsc-4/-dN--ujUimaEEZGyKGpORc16R0ctAy61Mdqh-E77XwX-ElO_j7bf4Wj92FT-8u0hCA2yNpvmmpEkOGwPB5DlL1sLR_AiGKoY42-Ar3rK_vIDkexPDazAXGpdpes12fEKDPq_FC9Q0uh8MSvsPC2xaTO0tu3s3Sz0L51CoAUjRYI?purpose=inline)
+
+[ordering.co](https://www.ordering.co/launch-your-own-delivery-marketplace?utm_source=chatgpt.com)
+
+Type: Full-stack MERN marketplace application.
+
+Key features:
+
+- Food ordering.
+- Grocery ordering.
+- Table reservations.
+- Multi-vendor marketplace.
+- Stripe Connect payments.
+- OTP verification.
+- Cloudinary media handling.
+- Automated PDF invoice generation.
+
+Technical stack:
+
+- MongoDB.
+- Express.js.
+- React.js.
+- Node.js.
+- Stripe Connect.
+- Cloudinary.
+
+This project demonstrates experience with marketplace workflows, payment processing, media management, and document generation.
+
+## 6.6 EzyMeet (Blabber) – Meeting recorder and automated summarization
+
+[AI Meeting Transcription Dashboard Recording Page by Pickolab Studio on Dribbble](https://images.openai.com/static-rsc-4/7u3iE3rtPwQQZRtY9a6Ve69GEf4Fc2XYbdof30x3sjIJ95wtk5ygEBsBiriabKR8F66jcEkk-wTdUukwAK6Qm9E6ECk4Z631vMb3RoTPog1_WkRZP2PJA7ba6aTeoV-Q5tkUbsLvXK3X1sl1DEZJeazwF5tcxprZEFsdPlf331c?purpose=inline)
+
+[dribbble.com](https://dribbble.com/shots/27014282-AI-Meeting-Transcription-Dashboard-Recording-Page?utm_source=chatgpt.com)
+
+Type: AI-powered meeting management system.
+
+Technology stack:
+
+- Chrome Extension.
+- MERN backend.
+- Flask AI service.
+- Automated email distribution.
+
+Key features:
+
+- Meeting recording.
+- Meeting information processing.
+- Automated summarization.
+- AI service integration.
+- Email summary distribution.
+
+The project combines browser integration, backend application development, and AI-powered automation.
+
+## 6.7 Global Academy Platform – Backend services
+
+Type: Backend engineering project.
+
+Key features:
+
+- UK Companies House API verification.
+- Domain validation.
+- GetStream.io group chat integration.
+- Backend service integration.
+- External API communication.
+- Group communication functionality.
+
+This project demonstrates experience connecting third-party services with backend application workflows.
+
+## 6.8 ConnectUS – MERN social networking platform
+
+[Messenger App by Mako Metivishvili on Dribbble](https://images.openai.com/static-rsc-4/Z2ls4fIWu6Vj4336P3q3n1-iC6KFJOB8LosiPM0QWW71PMuMSRCyAG7u0lEhOCtMcFTwcg4xVcYhaf1b5FDZlQjapFGnjKJKZqoOZlJle_OxXmHYkJNi1BHHJSG9uScqD17zV9zz1e91pB_-6of12GHa-Cor2Tqr1x5g7v6UmnM?purpose=inline)
+
+[dribbble.com](https://dribbble.com/shots/21005357-Messenger-App?utm_source=chatgpt.com)
+
+Technology stack:
+
+- MongoDB.
+- Express.js.
+- React.
+- Node.js.
+- Stream Chat.
+- JWT authentication.
+- Cookie-based authentication.
+- MongoDB Atlas.
+
+Key features:
+
+- User registration and login.
+- User profiles.
+- Friend management.
+- Social interactions.
+- Real-time messaging.
+- Video calling.
+
+You also previously planned to integrate an Ollama-powered AI chatbot into ConnectUS.
+
+## 6.9 VidTube Backend – Video-sharing application backend
+
+[File Upload UI designs, themes, templates and downloadable graphic elements on Dribbble](https://images.openai.com/static-rsc-4/qQdohMKhMuABe3OZGAapgwx1LT4a44-f-yNWuWElL_FtcBmOKA45c6akuNqf-OQ-VwabnKCG5mJ9sLAjpF3_9EGN5HHYQ7A1UK4fJdkp-9DQuXCt_SpAe5OCsDW6jk-niRgXLoqetzOW09ESgVNDidvtxZsx5pa7fEnJ1tlyeMg?purpose=inline)
+
+[dribbble.com](https://dribbble.com/tags/file-upload-ui?utm_source=chatgpt.com)
+
+Type: Backend development project.
+
+Key features:
+
+- Authentication.
+- Video uploads.
+- User profiles.
+- Subscription management.
+- Watch history.
+- Media management.
+- Cloudinary integration.
+
+The project focuses on implementing common backend features of a video-sharing platform.
+
+## 6.10 AI Email Classification and Management System
+
+[How I Automated My Gmail with AI: Turning Emails into Actionable Tasks | by Suganthi | Medium](https://images.openai.com/static-rsc-4/DRMzs5PgQY6U08fr0w8_Qq9ykP5629TX4YOgWmgIT5hpWzWMqprS9fTo0gkdrGsIWy1HgnSv20nNODgwYP-TdlIbVCS8jB6zwOTMpES6brPmeHKfzrUky05y_RtfMZZo-r8v4iPR5645wT8TUmjynsqxBgxZWh3pVVuQkFrwd4k?purpose=inline)
+
+[medium.com](https://medium.com/%40suganthi2496/how-i-automated-my-gmail-with-ai-turning-emails-into-actionable-tasks-a6cfff464452?utm_source=chatgpt.com)
+
+Type: Machine learning and AI application.
+
+Dataset: Enron email corpus.
+
+Dataset size: Approximately 1.43 GB (as discussed).
+
+Classification categories:
+
+1. Work
+2. Finance
+3. Shopping
+4. Promotions
+5. Personal
+
+Your mapped dataset contained:
+
+| Category   | Sample count |
+| ---------- | ------------ |
+| Work       | 998          |
+| Finance    | 340          |
+| Shopping   | 326          |
+| Promotions | 300          |
+| Personal   | 141          |
+| Total      | 2,105        |
+
+Model experiments
+
+| Approach        | Accuracy | Macro F1 | Personal Recall |
+| --------------- | -------- | -------- | --------------- |
+| Baseline        | 87.3%    | 0.756    | 10.5%           |
+| Class weighting | 84.8%    | 0.816    | 68.4%           |
+| Oversampling    | 88.9%    | 0.825    | 36.8%           |
+
+Your oversampling experiment achieved the highest reported accuracy and macro F1 among these approaches, while class weighting achieved the highest Personal-category recall.
+
+Planned application capabilities:
+
+- Gmail integration.
+- Email retrieval.
+- Automated classification.
+- Search by category.
+- Natural-language email management.
+- Archiving and deletion based on category.
+- Email organization.
+
+## 6.11 BharatDataStream – API Gateway for survey datasets
+
+Competition: Statathon 2025.
+
+Problem statement: PS-2 – API Gateway for Survey Datasets.
+
+Project concept: BharatDataStream.
+
+Objective: Build an API gateway for NSS microdata ingestion.
+
+Areas explored:
+
+- API-based dataset ingestion.
+- Survey data accessibility.
+- Dataset processing.
+- Backend data integration.
+- PostgreSQL and API architecture.
+
+This was a proposed hackathon solution discussed previously.
+
+## 6.12 Frontend cloning projects
+
+You have also built or worked on frontend reproduction projects:
+
+| Project                       | Purpose                                   |
+| ----------------------------- | ----------------------------------------- |
+| Spotify Clone                 | Music streaming interface                 |
+| Netflix Landing Page Clone    | Frontend recreation and responsive design |
+| UltraEdit Download Page Clone | Website layout and CSS practice           |
+
+# 7. Competitions and achievements
+
+## Competitive achievements
+
+First Place – Coding Competition
+
+Participated in a competitive coding event at Vasireddy Venkatadri Institute of Technology (VVIT) and secured first place.
+
+First Place – Deploy It Mini-Hackathon
+
+Won first place in the Deploy It mini-hackathon organized by RVR & JC College of Engineering.
+
+## Other competitions and training
+
+Flipkart GRiD 8.0
+
+- Participated in the engineering competition.
+- Completed the Round 2 online assessment.
+
+Wipro TalentNext
+
+\- Participated in the Java Full Stack training program.
+
+Other hackathon involvement:
+
+- TBO VoyageHack 3.0.
+- Statathon 2025.
+- NIAT Buildathon AP.
+- Smart India Hackathon.
+- Flipkart Grid.
+
+# 8. Data Structures and Algorithms
+
+You have actively worked on DSA for placement and product-based company preparation.
+
+## Topics studied or practiced
+
+| Area               | Concepts                                      |
+| ------------------ | --------------------------------------------- |
+| Arrays             | Traversal, searching, array patterns          |
+| Strings            | String manipulation and problem-solving       |
+| Linked Lists       | Node creation, insertion, deletion, traversal |
+| Stacks             | Stack operations and applications             |
+| Queues             | Queue operations and applications             |
+| Searching          | Binary search and rotated sorted arrays       |
+| Array patterns     | Two pointers and sliding windows              |
+| Index problems     | Pivot index                                   |
+| Frequency problems | Repeating and missing numbers                 |
+
+You have discussed Trees, Dynamic Programming and Greedy Algorithms as important next learning areas.
+
+## Platforms and resources
+
+- LeetCode.
+- GeeksforGeeks.
+- HackerRank.
+- CodeChef.
+- CodeJeet.
+- Striver's A2Z DSA sheet.
+
+You have also explored:
+
+- TCS NQT preparation.
+- TCS coding assessments.
+- Java-based DSA.
+- Core Java.
+- Interview preparation for product-based companies.
+
+# 9. AI and machine learning learning journey
+
+Your AI learning has progressed from foundational machine learning toward LLM applications and agentic systems.
+
+## Machine learning
+
+Topics you've studied or explored:
+
+- Data preprocessing.
+- Exploratory Data Analysis.
+- Correlation.
+- Multicollinearity.
+- Linear Regression.
+- Gaussian Naive Bayes.
+- Classification.
+- Classification metrics.
+- Imbalanced data.
+- Oversampling.
+- Model comparisons.
+
+## AI engineering
+
+You are currently exploring the transition from basic LLM API integration to complete agentic applications.
+
+Concepts you've discussed include:
+
+- Prompt engineering.
+- Temperature.
+- Conversation history.
+- Structured output.
+- Pydantic.
+- ReAct.
+- Tool calling.
+- RAG.
+- Embeddings.
+- Vector databases.
+- LangChain.
+- LangGraph.
+- LangSmith.
+- MCP.
+- Agent memory.
+- Agent orchestration.
+- Local LLM APIs.
+- AI application deployment.
+
+# 10. System design and backend engineering
+
+Your backend interests include both application development and distributed systems.
+
+## System design concepts
+
+- API Gateway.
+- Microservices.
+- Database per Service.
+- Strangler Fig Pattern.
+- Event-Driven Architecture.
+- Outbox Pattern.
+- Change Data Capture.
+- Redis caching.
+- Real-time communication.
+- Database optimization.
+- Scalable video storage systems.
+
+## Backend topics you have worked on or investigated
+
+- MongoDB aggregation pipelines.
+- Mongoose schema design.
+- JWT authentication.
+- OAuth.
+- Cookie-based authentication.
+- REST API design.
+- Middleware.
+- File uploads.
+- Cloudinary integration.
+- Stripe payment integration.
+- Stream Chat.
+- PostgreSQL.
+- Redis.
+- Node.js asynchronous operations.
+- Third-party API integrations.
+
+# 11. Development environment and hardware
+
+| Component                    | Information                                 |
+| ---------------------------- | ------------------------------------------- |
+| Laptop RAM                   | 16 GB                                       |
+| GPU                          | NVIDIA GeForce RTX 3050                     |
+| Operating system             | Windows                                     |
+| Main IDE                     | Visual Studio Code                          |
+| AI coding tools              | Cursor AI, Antigravity, OpenCode, Codex CLI |
+| Python management            | uv, Conda, Anaconda                         |
+| JavaScript runtime           | Node.js                                     |
+| Database environment         | MongoDB Atlas and local MongoDB             |
+| Deployment platform explored | Vercel                                      |
+
+You have also explored using your laptop for running local LLMs through Ollama.
+
+# 12. Development troubleshooting and technical issues
+
+Some technologies and errors you've investigated while building applications:
+
+| Area             | Issues investigated                                   |
+| ---------------- | ----------------------------------------------------- |
+| Vercel           | Vite build errors and deployment configuration        |
+| Git              | Push permissions, branch references, Git identity     |
+| npm / PowerShell | PowerShell execution policy errors                    |
+| MongoDB          | Connection failures, InvalidNamespace, duplicate keys |
+| Mongoose         | Schema version fields and database issues             |
+| Cloudinary       | File upload and missing temporary folder errors       |
+| JWT              | Cookie handling and authentication                    |
+| Gemini API       | 429 rate-limit errors                                 |
+| Conda            | Environment and package management issues             |
+| uv               | Project initialization and dependency resolution      |
+| LaTeX            | Resume formatting and compilation errors              |
+| Docker           | Container and environment configuration               |
+
+# 13. Personal interests and hobbies
+
+## Gaming
+
+- Free Fire.
+- Free Fire MAX.
+
+## Cricket
+
+You follow the Indian Premier League (IPL).
+
+Team preference: Chennai Super Kings (CSK).
+
+Favorite cricket personality: MS Dhoni.
+
+You also follow or track:
+
+- Virat Kohli.
+- Suryakumar Yadav.
+- Player statistics.
+- Match metrics.
+- Net Run Rate calculations.
+
+## Television and entertainment
+
+- Bigg Boss Telugu.
+- Regional Telugu entertainment.
+- Telugu pop culture.
+
+## Travel and outings
+
+Places you've mentioned visiting:
+
+- Annavaram, by train.
+- Wonderla Amusement Park in the Hyderabad area.
+
+Destinations and trips you've previously explored:
+
+- Guntur to Tirupati and MBU.
+- Guntur to Maredumilli, including a 30-person, two-night, three-day itinerary.
+- Gokarna versus Kolad.
+- Mumbai tempo traveller pricing.
+
+These are a combination of reported visits and travel-planning discussions, not all confirmed completed trips.
+
+# 14. Other personal goals and lifestyle preferences
+
+You have discussed:
+
+- Starting and maintaining a gym routine.
+- Building muscle while reducing belly fat.
+- Budget-friendly Indian meal planning.
+- High-protein vegetarian and non-vegetarian food options.
+- Eggs and chicken as preferred protein sources.
+- Evening gym schedules.
+- Affordable bachelor-friendly food plans.
+
+You previously supplied these details for a diet plan in November 2026:
+
+| Detail           | Previously shared                     |
+| ---------------- | ------------------------------------- |
+| Weight           | Approximately 70 kg                   |
+| Height           | 167 cm                                |
+| Food preferences | Eggs and chicken; later excluded fish |
+| Food budget      | ₹100–150 per day                      |
+| Gym timing       | Evening                               |
+| Daily activity   | Mostly sitting                        |
+
+These are historical details and may no longer represent your current measurements or routine.
+
+# 15. Your professional social presence
+
+| Platform           | Known information                                                                                        |
+| ------------------ | -------------------------------------------------------------------------------------------------------- |
+| LinkedIn           | [Srinivasa Reddy Sanikommu](https://www.linkedin.com/in/srinivasreddysanikommu2/?utm_source=chatgpt.com) |
+| GitHub             | Username mentioned: `srinvasreddyy`; URL not verified                                                    |
+| LeetCode           | Uses the platform for DSA practice; username unknown                                                     |
+| GeeksforGeeks      | Uses the platform; username unknown                                                                      |
+| HackerRank         | Uses the platform; username unknown                                                                      |
+| CodeChef           | Uses the platform; username unknown                                                                      |
+| Kaggle             | Profile not provided                                                                                     |
+| Instagram          | Profile not provided                                                                                     |
+| X / Twitter        | Profile not provided                                                                                     |
+| YouTube            | Profile not provided                                                                                     |
+| Personal portfolio | URL not provided                                                                                         |
+
+# 16. Consolidated career profile
+
+This is the combined view of your professional identity based on your academic record, work experience, projects, training, competitions and technical interests.
+
+| Dimension              | Consolidated profile                             |
+| ---------------------- | ------------------------------------------------ |
+| Education              | B.Tech CSE – AI & ML, 2027                       |
+| Academic background    | MPC, 95% in Intermediate                         |
+| Placement              | TCS Prime, ₹9.09 LPA reported                    |
+| Experience             | MERN Backend Developer Intern at KriBud Web Tech |
+| Full-stack development | MERN, Next.js, Flask integration                 |
+| Backend development    | Node.js, Express, APIs, authentication, Redis    |
+| AI/ML                  | Scikit-learn, PyTorch, CNNs, EfficientNet, ViT   |
+| AI engineering         | LLMs, RAG, ReAct, LangChain, LangGraph           |
+| Database engineering   | MongoDB, PostgreSQL, Redis                       |
+| Cloud and tools        | AWS Academy training, Docker, Vercel, GitHub     |
+| Research               | Deepfake detection with cross-attentional fusion |
+| Achievements           | Two reported first-place wins                    |
+| Competitions           | Flipkart GRiD 8.0, TBO VoyageHack, Statathon     |
+| Career goals           | Google, Atlassian, Stripe                        |
+
+# 17. Master list of your projects
+
+For easy reference, here is your consolidated project inventory.
+
+| #  | Project                       | Main domain                  |
+| -- | ----------------------------- | ---------------------------- |
+| 1  | InsureAI                      | MERN + Machine Learning      |
+| 2  | AgriSakha                     | Multimodal AI                |
+| 5  | EventSync AI                  | Event Management + Redis     |
+| 6  | OrderNow (Loksar)             | Multi-vendor Marketplace     |
+| 7  | EzyMeet (Blabber)             | AI Meeting Automation        |
+| 8  | Global Academy Platform       | Backend Engineering          |
+| 9  | ConnectUS                     | MERN Social Networking       |
+| 10 | VidTube Backend               | Video Platform Backend       |
+| 11 | AI Email Classification       | Machine Learning + AI Agents |
+| 12 | BharatDataStream              | Data Engineering + APIs      |
+| 13 | Spotify Clone                 | Frontend Development         |
+| 14 | Netflix Landing Page Clone    | Frontend Development         |
+| 15 | UltraEdit Download Page Clone | Frontend Development         |
+
+Project names and descriptions are consolidated from your two profiles and earlier discussions. Some are collaborative, research, proposed, or learning projects rather than independently verified deployed products.
+
