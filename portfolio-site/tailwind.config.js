@@ -4,21 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        obsidian: "#08080A",
-        stone: "#EFDED9",
-        vermilion: "#FF3B1D",
-        emerald: "#10B981",
-        hairline: "#1F1F24",
-        ink: "#111111",
+        // Exact Editorial Palette Specification
+        alabaster: "#F4F0EA",   // Background (60%) — Soft, warm, high-end editorial canvas
+        linen: "#EAE3D8",       // Surface Containers — Project cards, filtering tabs, code blocks
+        espresso: "#1E1916",    // Typography — Sharp headlines, rich readable text
+        umber: "#6E655F",       // Supporting Text — Paragraph blocks, labels, metadata
+        terracotta: "#C96541",  // Accent / CTA (5%) — Micro-interactions, active states, buttons
       },
       fontFamily: {
         display: ["'Syne'", "'Space Grotesk'", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
         body: ["'Inter'", "sans-serif"],
-      },
-      animation: {
-        "spin-slow": "spin 14s linear infinite",
-        "pulse-fast": "pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },
