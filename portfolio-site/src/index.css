@@ -70,17 +70,17 @@ body {
 .display-hero {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: clamp(2.75rem, 6.4vw, 5.4rem);
+  font-size: clamp(2.35rem, 5.8vw, 5.1rem);
   letter-spacing: -0.04em;
-  line-height: 0.94;
+  line-height: 0.96;
 }
 
 .display-section {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: clamp(2.1rem, 4.6vw, 3.85rem);
+  font-size: clamp(2rem, 4.6vw, 3.85rem);
   letter-spacing: -0.035em;
-  line-height: 0.98;
+  line-height: 1.04;
 }
 
 /* Editorial Surfaces */
@@ -91,11 +91,11 @@ body {
 }
 
 .floating-pill {
-  background: rgba(244, 240, 234, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(244, 240, 234, 0.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(30, 25, 22, 0.15);
-  box-shadow: 0 10px 26px rgba(30, 25, 22, 0.09);
+  box-shadow: 0 12px 30px rgba(30, 25, 22, 0.1);
 }
 
 /* Subtle Warm Architectural Grid */
@@ -125,13 +125,54 @@ body {
   );
 }
 
+/* Slow, Smooth Mascot Text Squeeze & Elastic Compression Effects */
+[data-mascot-target="true"] {
+  position: relative;
+  display: inline-block;
+  transition:
+    transform 1.25s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.1s ease;
+  transform-origin: left center;
+}
+
+.mascot-squeezed-text {
+  transform: scaleX(0.76) scaleY(1.22) skewX(-7deg) rotate(-1.5deg) !important;
+  filter: drop-shadow(5px 6px 0px rgba(201, 101, 65, 0.35));
+}
+
+.mascot-damaged-text {
+  text-decoration: wavy underline #C96541 2.5px !important;
+  text-underline-offset: 6px !important;
+}
+
+/* Vibrant Instagram Reels-Style Dynamic Marker Highlight */
+.reel-marker-wrap {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  padding: 0.04em 0.32em 0.06em 0.32em;
+  margin: 0 0.06em;
+  border-radius: 0.28em;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.reel-marker-bg {
+  position: absolute;
+  inset: 5% -1% 3% -1%;
+  z-index: -1;
+  border-radius: 0.28em 0.42em 0.24em 0.38em;
+  transform-origin: left center;
+  pointer-events: none;
+}
+
 @keyframes spinSlow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
 .animate-spin-ring {
-  animation: spinSlow 28s linear infinite;
+  animation: spinSlow 32s linear infinite;
 }
 
 @keyframes floatSlow {
@@ -140,10 +181,10 @@ body {
 }
 
 .animate-float {
-  animation: floatSlow 3.6s ease-in-out infinite;
+  animation: floatSlow 4.2s ease-in-out infinite;
 }
 
-/* Range Slider Styling (#C96541 Burnt Terracotta & #EAE3D8 Muted Linen) */
+/* Range Slider Styling */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;

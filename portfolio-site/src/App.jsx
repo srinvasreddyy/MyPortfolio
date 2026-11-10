@@ -32,7 +32,154 @@ import {
   Workflow,
   CheckCircle2,
   Info,
+  Footprints,
+  Mountain,
+  Minimize2,
 } from "lucide-react";
+
+// ============================================================================
+// SLOW, CINEMATIC INSTAGRAM REELS-STYLE DYNAMIC MARKER & BRUSH UNDERLINE
+// Used across both headings (H1/H2/H3) and key body phrases with slow drawing
+// ============================================================================
+function ReelHighlight({
+  children,
+  tone = "terracotta", // "terracotta" | "linen" | "sage" | "amber"
+  variant = "marker",  // "marker" | "underline"
+  delay = 0.15,
+  isHeading = false,
+  className = "",
+}) {
+  const palette = {
+    terracotta: {
+      gradient: "linear-gradient(104deg, #FF5722 0%, #D94E28 100%)",
+      shadow: "0 6px 18px rgba(255, 87, 34, 0.34)",
+      stroke: "#FF4D1C",
+      underlineGlow: "rgba(255, 87, 34, 0.22)",
+      markerText: "text-[#FFFDF9]",
+      underlineText: "text-inherit",
+    },
+    linen: {
+      gradient: "linear-gradient(104deg, #FFE135 0%, #FACC15 100%)",
+      shadow: "0 6px 18px rgba(250, 204, 21, 0.42)",
+      stroke: "#EAB308",
+      underlineGlow: "rgba(250, 204, 21, 0.32)",
+      markerText: "text-[#1E1916]",
+      underlineText: "text-inherit",
+    },
+    sage: {
+      gradient: "linear-gradient(104deg, #10B981 0%, #059669 100%)",
+      shadow: "0 6px 18px rgba(16, 185, 129, 0.34)",
+      stroke: "#059669",
+      underlineGlow: "rgba(16, 185, 129, 0.24)",
+      markerText: "text-[#FFFDF9]",
+      underlineText: "text-inherit",
+    },
+    amber: {
+      gradient: "linear-gradient(104deg, #4F46E5 0%, #3730A3 100%)",
+      shadow: "0 6px 18px rgba(79, 70, 229, 0.34)",
+      stroke: "#4F46E5",
+      underlineGlow: "rgba(79, 70, 229, 0.22)",
+      markerText: "text-[#FFFDF9]",
+      underlineText: "text-inherit",
+    },
+  }[tone] || {
+    gradient: "linear-gradient(104deg, #FF5722 0%, #D94E28 100%)",
+    shadow: "0 6px 18px rgba(255, 87, 34, 0.34)",
+    stroke: "#FF4D1C",
+    underlineGlow: "rgba(255, 87, 34, 0.22)",
+    markerText: "text-[#FFFDF9]",
+    underlineText: "text-inherit",
+  };
+
+  if (variant === "underline") {
+    return (
+      <span
+        className={`relative inline-block px-1 -mx-0.5 ${
+          isHeading ? "" : "font-extrabold"
+        } ${palette.underlineText} ${className}`}
+      >
+        {/* Slow luminous wash behind underlined keywords */}
+        <motion.span
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{
+            duration: 1.75,
+            delay,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          style={{ backgroundColor: palette.underlineGlow }}
+          className="absolute inset-x-0 bottom-0.5 h-[38%] -z-10 rounded-sm origin-left pointer-events-none"
+        />
+        <span className="relative z-10">{children}</span>
+        {/* Slow dual-stroke hand-drawn Reels brush underline */}
+        <svg
+          viewBox="0 0 120 14"
+          preserveAspectRatio="none"
+          className={`absolute left-0 ${
+            isHeading ? "-bottom-2 h-4" : "-bottom-1.5 h-3.5"
+          } w-full pointer-events-none overflow-visible`}
+        >
+          <motion.path
+            d="M 2 9 Q 48 2 118 8"
+            fill="none"
+            stroke={palette.stroke}
+            strokeWidth={isHeading ? "5" : "4.4"}
+            strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{
+              duration: 2.1,
+              delay,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          />
+          <motion.path
+            d="M 8 12.5 Q 65 9 114 11.5"
+            fill="none"
+            stroke={palette.stroke}
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.78 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{
+              duration: 1.9,
+              delay: delay + 0.35,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          />
+        </svg>
+      </span>
+    );
+  }
+
+  return (
+    <span
+      className={`reel-marker-wrap ${
+        isHeading ? "" : "font-extrabold"
+      } ${palette.markerText} ${className}`}
+    >
+      <motion.span
+        initial={{ scaleX: 0, opacity: 0, skewX: -8, rotate: -0.6 }}
+        whileInView={{ scaleX: 1, opacity: 1, skewX: -8, rotate: -0.6 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{
+          duration: 1.85,
+          delay,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+        style={{
+          background: palette.gradient,
+          boxShadow: palette.shadow,
+        }}
+        className="reel-marker-bg"
+      />
+      <span className="relative z-10">{children}</span>
+    </span>
+  );
+}
 
 // ============================================================================
 // AUTOMATICALLY DISCOVER THE 4 PROFILE PHOTOS IN "Complete details"
@@ -85,15 +232,62 @@ const SECTION_PHOTO_SRC = {
 };
 
 // ============================================================================
-// 16 LARGE COLORFUL BRAND TECH STACK ICONS (ICONS ONLY — NO TEXT LABELS)
+// EXACT 18 COLORFUL BRAND TECH STACK ICONS (MULTI-COLOR, NON-THEMED)
 // ============================================================================
 const COLORFUL_TECH_ICONS = [
   {
-    id: "python",
+    id: "Java",
+    bg: "#FFFFFF",
+    border: "#E76F00",
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7" fill="none">
+        <path
+          d="M8.5 14.5c0 1.3 2.5 2 5 1.5 1.5-.3 2.5-1 2.5-2 0-1-1.5-1.5-3.5-1.8-2-.3-4-.9-4-2.2 0-1.2 1.8-2 4-2"
+          stroke="#5382A1"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M17.2 11.5c1.2 0 2.3.8 2.3 2s-1.1 2-2.3 2"
+          stroke="#5382A1"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M6.5 18.2c2.5 1.5 8.5 1.5 11 0"
+          stroke="#E76F00"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M10 3.2c0 1.4 1.6 1.8 1.6 3.2M13.5 2.5c0 1.5 1.5 2 1.5 3.5"
+          stroke="#E76F00"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    id: "JavaScript",
+    bg: "#F7DF1E",
+    border: "#D4B800",
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
+        <rect width="24" height="24" rx="5" fill="#F7DF1E" />
+        <path
+          fill="#000000"
+          d="M13.5 16.8c0 1.6-.9 2.3-2.3 2.3-1.2 0-2-.6-2.3-1.4l1.3-.8c.2.4.5.7 1 .7.5 0 .8-.2.8-1v-5.2h1.5v5.4zm4.8 2.3c-1.5 0-2.4-.7-2.8-1.7l1.3-.8c.3.6.8 1 1.6 1 .7 0 1.1-.3 1.1-.8 0-.5-.4-.7-1.2-1.1l-.4-.2c-1.2-.5-1.9-1.1-1.9-2.4 0-1.2.9-2.1 2.3-2.1 1 0 1.8.3 2.3 1.3l-1.2.8c-.3-.5-.6-.7-1.1-.7-.5 0-.8.3-.8.7 0 .5.3.7 1.1 1l.4.2c1.4.6 2.1 1.2 2.1 2.5 0 1.5-1.1 2.3-2.8 2.3z"
+        />
+      </svg>
+    ),
+  },
+  {
+    id: "Python",
     bg: "#FFFFFF",
     border: "#3776AB",
     svg: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7">
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
         <path
           fill="#3776AB"
           d="M11.9 2C7.3 2 7.6 4 7.6 4v2.1h4.5v.7H5.7S2 6.4 2 11.9s3.2 5.3 3.2 5.3h1.9v-2.6s-.1-3.2 3.1-3.2h5.3s3-.1 3-2.9V4.8S19 2 11.9 2zm-2.5 1.6c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9z"
@@ -106,27 +300,69 @@ const COLORFUL_TECH_ICONS = [
     ),
   },
   {
-    id: "js",
-    bg: "#F7DF1E",
-    border: "#D4B800",
+    id: "SQL",
+    bg: "#FFFFFF",
+    border: "#00758F",
     svg: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7">
-        <rect width="24" height="24" rx="5" fill="#F7DF1E" />
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7" fill="none">
+        <ellipse cx="12" cy="5.5" rx="7.5" ry="3" fill="#00758F" />
         <path
-          fill="#1E1916"
-          d="M13.5 16.8c0 1.6-.9 2.3-2.3 2.3-1.2 0-2-.6-2.3-1.4l1.3-.8c.2.4.5.7 1 .7.5 0 .8-.2.8-1v-5.2h1.5v5.4zm4.8 2.3c-1.5 0-2.4-.7-2.8-1.7l1.3-.8c.3.6.8 1 1.6 1 .7 0 1.1-.3 1.1-.8 0-.5-.4-.7-1.2-1.1l-.4-.2c-1.2-.5-1.9-1.1-1.9-2.4 0-1.2.9-2.1 2.3-2.1 1 0 1.8.3 2.3 1.3l-1.2.8c-.3-.5-.6-.7-1.1-.7-.5 0-.8.3-.8.7 0 .5.3.7 1.1 1l.4.2c1.4.6 2.1 1.2 2.1 2.5 0 1.5-1.1 2.3-2.8 2.3z"
+          d="M4.5 5.5v13c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-13"
+          fill="#E0F2FE"
+          stroke="#00758F"
+          strokeWidth="1.8"
+        />
+        <text
+          x="6.2"
+          y="15.5"
+          fontSize="6.2"
+          fontWeight="900"
+          fill="#F29111"
+          fontFamily="monospace"
+        >
+          SQL
+        </text>
+      </svg>
+    ),
+  },
+  {
+    id: "HTML5",
+    bg: "#FFFFFF",
+    border: "#E34F26",
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
+        <path fill="#E34F26" d="M4 2l1.5 17L12 22l6.5-3L20 2H4z" />
+        <path fill="#EF652A" d="M12 3.5v16.8l5.2-2.4L18.4 3.5H12z" />
+        <path
+          fill="#FFFFFF"
+          d="M7.5 7h9l-.2 2.2H9.6l.2 2.3h6.3l-.6 6.2-3.5 1-3.5-1-.2-3h2.2l.1 1.5 1.4.4 1.4-.4.2-2H7.9L7.5 7z"
         />
       </svg>
     ),
   },
   {
-    id: "react",
+    id: "CSS3",
+    bg: "#FFFFFF",
+    border: "#1572B6",
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
+        <path fill="#1572B6" d="M4 2l1.5 17L12 22l6.5-3L20 2H4z" />
+        <path fill="#33A9DC" d="M12 3.5v16.8l5.2-2.4L18.4 3.5H12z" />
+        <path
+          fill="#FFFFFF"
+          d="M7.5 7h9l-.4 4.5H9.8l.2 2h5.8l-.4 4.2-3.4 1-3.4-1-.2-2.6h2.2l.1 1.2 1.3.4 1.3-.4.1-1.6H7.9L7.5 7z"
+        />
+      </svg>
+    ),
+  },
+  {
+    id: "React.js",
     bg: "#20232A",
     border: "#61DAFB",
     svg: (
       <svg
         viewBox="0 0 24 24"
-        className="w-7 h-7"
+        className="w-6 h-6 sm:w-7 sm:h-7"
         fill="none"
         stroke="#61DAFB"
         strokeWidth="1.8"
@@ -151,59 +387,41 @@ const COLORFUL_TECH_ICONS = [
     ),
   },
   {
-    id: "node",
-    bg: "#ECFDF5",
+    id: "Node.js",
+    bg: "#FFFFFF",
     border: "#339933",
     svg: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7"
-        fill="none"
-        stroke="#339933"
-        strokeWidth="2.2"
-      >
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
         <polygon
           points="12 2 21 7 21 17 12 22 3 17 3 7 12 2"
           fill="#339933"
-          fillOpacity="0.18"
         />
-        <path d="M12 8v8m-3-6l3-2 3 2" />
-      </svg>
-    ),
-  },
-  {
-    id: "mongodb",
-    bg: "#F0FDF4",
-    border: "#47A248",
-    svg: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7"
-        fill="none"
-        stroke="#47A248"
-        strokeWidth="2"
-      >
-        <path
-          d="M12 2C7.5 7 6 11 6 14.5A6 6 0 0 0 12 20.5a6 6 0 0 0 6-6C18 11 16.5 7 12 2z"
-          fill="#47A248"
-          fillOpacity="0.22"
-        />
-        <line x1="12" y1="22" x2="12" y2="10" />
-      </svg>
-    ),
-  },
-  {
-    id: "express",
-    bg: "#1E1916",
-    border: "#C96541",
-    svg: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7">
         <text
-          x="2.5"
-          y="16"
-          fontSize="10.5"
+          x="6.5"
+          y="14.5"
+          fontSize="6.8"
           fontWeight="900"
-          fill="#F4F0EA"
+          fill="#FFFFFF"
+          fontFamily="monospace"
+        >
+          JS
+        </text>
+      </svg>
+    ),
+  },
+  {
+    id: "Express.js",
+    bg: "#FFFFFF",
+    border: "#259DFF",
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
+        <circle cx="12" cy="12" r="10" fill="#EFF6FF" />
+        <text
+          x="3.5"
+          y="15.5"
+          fontSize="9.5"
+          fontWeight="900"
+          fill="#1D4ED8"
           fontFamily="monospace"
         >
           EX
@@ -212,180 +430,202 @@ const COLORFUL_TECH_ICONS = [
     ),
   },
   {
-    id: "java",
-    bg: "#FFF7ED",
-    border: "#EA580C",
+    id: "MongoDB",
+    bg: "#FFFFFF",
+    border: "#47A248",
     svg: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" strokeWidth="2">
-        <path stroke="#2563EB" d="M17 9h1a3.5 3.5 0 1 1 0 7h-1" />
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
         <path
-          stroke="#2563EB"
-          fill="#DBEAFE"
-          d="M4 9h13v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9z"
+          d="M12 2C7.8 6.8 6.5 10.8 6.5 14.2A5.5 5.5 0 0 0 12 19.8a5.5 5.5 0 0 0 5.5-5.6C17.5 10.8 16.2 6.8 12 2z"
+          fill="#47A248"
         />
-        <line stroke="#EA580C" x1="7" y1="3" x2="7" y2="6" />
-        <line stroke="#EA580C" x1="10.5" y1="2" x2="10.5" y2="6" />
-        <line stroke="#EA580C" x1="14" y1="3" x2="14" y2="6" />
+        <path
+          d="M12 2v17.8a5.5 5.5 0 0 0 5.5-5.6C17.5 10.8 16.2 6.8 12 2z"
+          fill="#58AA50"
+        />
+        <line
+          x1="12"
+          y1="22"
+          x2="12"
+          y2="14"
+          stroke="#A6A385"
+          strokeWidth="1.8"
+        />
       </svg>
     ),
   },
   {
-    id: "sql",
-    bg: "#EFF6FF",
+    id: "PostgreSQL",
+    bg: "#FFFFFF",
     border: "#336791",
     svg: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7"
-        fill="none"
-        stroke="#336791"
-        strokeWidth="2"
-      >
-        <ellipse cx="12" cy="5" rx="8" ry="3" fill="#BFDBFE" />
-        <path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5" />
-        <path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
-      </svg>
-    ),
-  },
-  {
-    id: "flask",
-    bg: "#F0FDFA",
-    border: "#0D9488",
-    svg: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7"
-        fill="none"
-        stroke="#0D9488"
-        strokeWidth="2"
-      >
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7" fill="none">
         <path
-          fill="#CCFBF1"
-          d="M9 3h6m-5 0v5.2L4.4 18.6A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.8-2.4L14 8.2V3"
+          d="M7 6c0-2 2.2-3.5 5-3.5S17 4 17 6v6c0 3.5-2.2 6-5 6s-5-2.5-5-6V6z"
+          fill="#336791"
+        />
+        <path
+          d="M5 7c-1.5 0-2.5 1.5-2.5 3.5S4 14 5.5 14M19 7c1.5 0 2.5 1.5 2.5 3.5S20 14 18.5 14"
+          stroke="#336791"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <circle cx="10" cy="8.5" r="1" fill="#FFFFFF" />
+        <circle cx="14" cy="8.5" r="1" fill="#FFFFFF" />
+        <path
+          d="M12 11v8c0 1.5 1.5 2 2.5 1"
+          stroke="#FFFFFF"
+          strokeWidth="1.8"
+          strokeLinecap="round"
         />
       </svg>
     ),
   },
   {
-    id: "tailwind",
-    bg: "#F0F9FF",
-    border: "#06B6D4",
+    id: "Pinecone",
+    bg: "#FFFFFF",
+    border: "#00B4AB",
     svg: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7" fill="#06B6D4">
-        <path d="M12 6c-2.7 0-4.3 1.3-5 4 1-1.3 2.2-1.8 3.5-1.5.8.2 1.3.7 1.9 1.3 1 1 2.1 2.2 4.6 2.2 2.7 0 4.3-1.3 5-4-1 1.3-2.2 1.8-3.5 1.5-.8-.2-1.3-.7-1.9-1.3C15.6 7.2 14.5 6 12 6zM7 12c-2.7 0-4.3 1.3-5 4 1-1.3 2.2-1.8 3.5-1.5.8.2 1.3.7 1.9 1.3 1 1 2.1 2.2 4.6 2.2 2.7 0 4.3-1.3 5-4-1 1.3-2.2 1.8-3.5 1.5-.8-.2-1.3-.7-1.9-1.3C10.6 13.2 9.5 12 7 12z" />
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7" fill="none">
+        <polygon points="12 2 18 9 6 9" fill="#00B4AB" />
+        <polygon points="12 6 19 14 5 14" fill="#1C64F2" />
+        <polygon points="12 10 20 19 4 19" fill="#00B4AB" />
+        <rect x="10.5" y="19" width="3" height="3" fill="#1C64F2" />
       </svg>
     ),
   },
   {
-    id: "docker",
-    bg: "#EFF6FF",
-    border: "#2496ED",
+    id: "LangChain",
+    bg: "#FFFFFF",
+    border: "#10B981",
     svg: (
       <svg
         viewBox="0 0 24 24"
-        className="w-7 h-7"
+        className="w-6 h-6 sm:w-7 sm:h-7"
         fill="none"
-        stroke="#2496ED"
-        strokeWidth="2"
-      >
-        <rect x="3" y="10" width="4" height="4" fill="#BFDBFE" />
-        <rect x="8" y="10" width="4" height="4" fill="#BFDBFE" />
-        <rect x="13" y="10" width="4" height="4" fill="#BFDBFE" />
-        <rect x="8" y="5" width="4" height="4" fill="#BFDBFE" />
-        <path d="M2 14h19c0 4-3.5 6-9 6S2 18 2 14z" fill="#93C5FD" />
-      </svg>
-    ),
-  },
-  {
-    id: "aws",
-    bg: "#FFFBEB",
-    border: "#FF9900",
-    svg: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7"
-        fill="none"
-        stroke="#FF9900"
-        strokeWidth="2.2"
+        strokeWidth="2.4"
       >
         <path
-          fill="#FEF3C7"
-          d="M17.5 19H7a5 5 0 0 1-.5-9.97A6.5 6.5 0 0 1 19 10.5a4.5 4.5 0 0 1-1.5 8.5z"
+          stroke="#10B981"
+          strokeLinecap="round"
+          d="M10 13a4.5 4.5 0 0 0 6.4.4l2.5-2.5a4.5 4.5 0 0 0-6.4-6.4l-1.4 1.4"
+        />
+        <path
+          stroke="#0EA5E9"
+          strokeLinecap="round"
+          d="M14 11a4.5 4.5 0 0 0-6.4-.4l-2.5 2.5a4.5 4.5 0 0 0 6.4 6.4l1.4-1.4"
         />
       </svg>
     ),
   },
   {
-    id: "git",
-    bg: "#FEF2F2",
+    id: "Git",
+    bg: "#FFFFFF",
     border: "#F05032",
     svg: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7"
-        fill="none"
-        stroke="#F05032"
-        strokeWidth="2.2"
-      >
-        <circle cx="6" cy="6" r="2.5" fill="#FECACA" />
-        <circle cx="18" cy="6" r="2.5" fill="#FECACA" />
-        <circle cx="6" cy="18" r="2.5" fill="#FECACA" />
-        <path d="M6 8.5v7M18 8.5c0 4-6 3.5-12 7" />
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
+        <rect
+          x="5"
+          y="5"
+          width="14"
+          height="14"
+          rx="2.5"
+          transform="rotate(45 12 12)"
+          fill="#F05032"
+        />
+        <circle cx="12" cy="8.5" r="1.6" fill="#FFFFFF" />
+        <circle cx="12" cy="15.5" r="1.6" fill="#FFFFFF" />
+        <circle cx="15.5" cy="12" r="1.6" fill="#FFFFFF" />
+        <line
+          x1="12"
+          y1="8.5"
+          x2="12"
+          y2="15.5"
+          stroke="#FFFFFF"
+          strokeWidth="1.6"
+        />
+        <line
+          x1="12"
+          y1="9.5"
+          x2="15.5"
+          y2="12"
+          stroke="#FFFFFF"
+          strokeWidth="1.6"
+        />
       </svg>
     ),
   },
   {
-    id: "redis",
-    bg: "#FFF1F2",
-    border: "#DC382D",
+    id: "Docker",
+    bg: "#FFFFFF",
+    border: "#2496ED",
     svg: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7"
-        fill="none"
-        stroke="#DC382D"
-        strokeWidth="2"
-      >
-        <polygon points="12 3 21 8 12 13 3 8 12 3" fill="#FECDD3" />
-        <polyline points="3 13 12 18 21 13" />
-        <polyline points="3 17 12 22 21 17" />
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7" fill="none">
+        <rect x="4" y="10" width="3.5" height="3.2" fill="#2496ED" />
+        <rect x="8.2" y="10" width="3.5" height="3.2" fill="#2496ED" />
+        <rect x="12.4" y="10" width="3.5" height="3.2" fill="#2496ED" />
+        <rect x="8.2" y="6.2" width="3.5" height="3.2" fill="#2496ED" />
+        <path
+          d="M2.5 14h18.5c0 4.2-3.5 6.5-9 6.5S2.5 18.2 2.5 14z"
+          fill="#2496ED"
+        />
+        <circle cx="7" cy="16.8" r="1" fill="#FFFFFF" />
       </svg>
     ),
   },
   {
-    id: "pytorch",
-    bg: "#FFF7ED",
-    border: "#EE4C2C",
+    id: "Postman",
+    bg: "#FFFFFF",
+    border: "#FF6C37",
     svg: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7"
-        fill="none"
-        stroke="#EE4C2C"
-        strokeWidth="2.2"
-      >
-        <path d="M12 2l4 4-4 4" />
-        <path d="M8 6a7 7 0 1 0 8 0" />
-        <circle cx="15" cy="6" r="1.4" fill="#EE4C2C" />
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7">
+        <circle cx="12" cy="12" r="9.5" fill="#FF6C37" />
+        <path
+          d="M8.5 15.5l7-7M11.5 8.5h4v4"
+          stroke="#FFFFFF"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
       </svg>
     ),
   },
   {
-    id: "c-lang",
-    bg: "#EEF2FF",
-    border: "#4F46E5",
+    id: "Ollama",
+    bg: "#FFFFFF",
+    border: "#8B5CF6",
     svg: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7">
-        <text
-          x="6"
-          y="17"
-          fontSize="14"
-          fontWeight="900"
-          fill="#4F46E5"
-          fontFamily="monospace"
-        >
-          C
-        </text>
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7" fill="none">
+        <path
+          d="M7 9V5.5a1.5 1.5 0 0 1 3 0V8h4V5.5a1.5 1.5 0 0 1 3 0V9a5 5 0 0 1 1 3v5a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-5a5 5 0 0 1 1-3z"
+          fill="#EDE9FE"
+          stroke="#7C3AED"
+          strokeWidth="1.8"
+        />
+        <circle cx="10" cy="12.5" r="1.3" fill="#7C3AED" />
+        <circle cx="14" cy="12.5" r="1.3" fill="#7C3AED" />
+        <ellipse cx="12" cy="15.2" rx="2" ry="1.2" fill="#F43F5E" />
+      </svg>
+    ),
+  },
+  {
+    id: "AWS",
+    bg: "#FFFFFF",
+    border: "#FF9900",
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 sm:w-7 sm:h-7" fill="none">
+        <path
+          d="M17.5 15.5H6.8a4.2 4.2 0 0 1-.4-8.4A5.5 5.5 0 0 1 17.2 8a3.8 3.8 0 0 1 .3 7.5z"
+          fill="#232F3E"
+        />
+        <path
+          d="M6.5 18.2c3.5 2.2 7.5 2.2 11 0M16 17.2l2 1-.6 2"
+          stroke="#FF9900"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
   },
@@ -417,24 +657,38 @@ const ORBIT_MESSAGE_DIALOGUES = [
 ];
 
 // ============================================================================
-// EXPANDED RIGHT-ALIGNED 60FPS ORBITAL & ELASTIC BOUNCE PHYSICS ARENA
+// RESPONSIVE, FLUID-MECHANICS ORBITAL & ELASTIC BOUNCE ARENA
 // ============================================================================
 function HeroCircularPortraitPhysicsArena({ photoSrc }) {
   const arenaRef = useRef(null);
-  const pointerRef = useRef({ x: -9999, y: -9999, active: false });
+  const pointerRef = useRef({
+    x: -9999,
+    y: -9999,
+    vx: 0,
+    vy: 0,
+    active: false,
+  });
 
   const iconNodeRefs = useRef([]);
   const pillNodeRefs = useRef([]);
   const msgNodeRefs = useRef([]);
 
   useEffect(() => {
-    const width = window.innerWidth;
-    const isMobile = width < 640;
-    const isTablet = width >= 640 && width < 1024;
+    const getRadii = () => {
+      const width = window.innerWidth;
+      if (width < 400) {
+        return { rIcons: 78, rPills: 112, rMsgs: 146, hitScale: 0.72 };
+      }
+      if (width < 640) {
+        return { rIcons: 88, rPills: 124, rMsgs: 160, hitScale: 0.78 };
+      }
+      if (width < 1024) {
+        return { rIcons: 152, rPills: 212, rMsgs: 274, hitScale: 0.95 };
+      }
+      return { rIcons: 174, rPills: 242, rMsgs: 310, hitScale: 1 };
+    };
 
-    const R_ICONS = isMobile ? 115 : isTablet ? 150 : 162;
-    const R_PILLS = isMobile ? 158 : isTablet ? 210 : 228;
-    const R_MSGS = isMobile ? 202 : isTablet ? 272 : 296;
+    let radii = getRadii();
 
     const createRingNodes = (count, baseRadius, baseSpeed) =>
       Array.from({ length: count }, (_, i) => ({
@@ -446,33 +700,45 @@ function HeroCircularPortraitPhysicsArena({ photoSrc }) {
         vr: 0,
         scale: 1,
         vScale: 0,
-        phase: i * 1.3,
+        tilt: 0,
+        vTilt: 0,
+        phaseA: i * 1.37,
+        phaseB: i * 2.19 + 0.7,
       }));
 
-    // Slower, calmer orbital speeds
     const ringIcons = createRingNodes(
       COLORFUL_TECH_ICONS.length,
-      R_ICONS,
-      0.0016
+      radii.rIcons,
+      0.00085
     );
     const ringPills = createRingNodes(
       ORBIT_TEXT_ONLY_PILLS.length,
-      R_PILLS,
-      -0.0011
+      radii.rPills,
+      -0.0006
     );
     const ringMsgs = createRingNodes(
       ORBIT_MESSAGE_DIALOGUES.length,
-      R_MSGS,
-      0.00085
+      radii.rMsgs,
+      0.00042
     );
+
+    const handleResize = () => {
+      radii = getRadii();
+      ringIcons.forEach((n) => (n.baseRadius = radii.rIcons));
+      ringPills.forEach((n) => (n.baseRadius = radii.rPills));
+      ringMsgs.forEach((n) => (n.baseRadius = radii.rMsgs));
+    };
+
+    window.addEventListener("resize", handleResize);
 
     let rafId;
     let time = 0;
 
-    const stepRingPhysics = (nodes, domRefs, minArcRatio, hitRadius) => {
+    const stepFluidRingPhysics = (nodes, domRefs, minArcRatio, baseHitRadius) => {
       const N = nodes.length;
       const idealGap = (2 * Math.PI) / N;
       const minGap = idealGap * minArcRatio;
+      const hitRadius = baseHitRadius * radii.hitScale;
 
       for (let i = 0; i < N; i++) {
         const j = (i + 1) % N;
@@ -481,7 +747,7 @@ function HeroCircularPortraitPhysicsArena({ photoSrc }) {
         while (diff >= 2 * Math.PI) diff -= 2 * Math.PI;
 
         if (diff < minGap) {
-          const push = (minGap - diff) * 0.11;
+          const push = (minGap - diff) * 0.042;
           nodes[i].vAngle -= push;
           nodes[j].vAngle += push;
         }
@@ -489,8 +755,13 @@ function HeroCircularPortraitPhysicsArena({ photoSrc }) {
 
       for (let i = 0; i < N; i++) {
         const n = nodes[i];
-        const floatBob = Math.sin(time * 0.016 + n.phase) * 3.5;
-        const currentR = n.baseRadius + n.rOffset + floatBob;
+
+        const radialWave =
+          Math.sin(time * 0.012 + n.phaseA) * 4.8 +
+          Math.cos(time * 0.008 + n.phaseB) * 2.8;
+        const tangentialWave = Math.sin(time * 0.01 + n.phaseB) * 0.00015;
+
+        const currentR = n.baseRadius + n.rOffset + radialWave;
         const x = Math.cos(n.angle) * currentR;
         const y = Math.sin(n.angle) * currentR;
 
@@ -500,55 +771,64 @@ function HeroCircularPortraitPhysicsArena({ photoSrc }) {
           const dist = Math.hypot(dx, dy);
 
           if (dist < hitRadius && dist > 0.001) {
-            const strength = (hitRadius - dist) / hitRadius;
+            const strength = Math.pow((hitRadius - dist) / hitRadius, 1.35);
             const tx = -Math.sin(n.angle);
             const ty = Math.cos(n.angle);
             const dotTangential = (dx * tx + dy * ty) / dist;
             const bounceDir =
-              Math.abs(dotTangential) > 0.15
+              Math.abs(dotTangential) > 0.12
                 ? Math.sign(dotTangential)
                 : -Math.sign(n.baseSpeed);
 
-            n.vAngle += bounceDir * strength * 0.018;
-            n.vr += strength * 2.6;
-            n.vScale += strength * 0.04;
+            n.vAngle += bounceDir * strength * 0.01;
+            n.vr += strength * 1.8;
+            n.vScale += strength * 0.024;
+            n.vTilt += bounceDir * strength * 1.6;
           }
         }
 
-        n.vAngle *= 0.92;
-        n.angle = (n.angle + n.baseSpeed + n.vAngle) % (2 * Math.PI);
+        n.vAngle *= 0.968;
+        n.angle =
+          (n.angle + n.baseSpeed + tangentialWave + n.vAngle) % (2 * Math.PI);
         if (n.angle < 0) n.angle += 2 * Math.PI;
 
-        const rForce = -0.11 * n.rOffset;
-        n.vr = (n.vr + rForce) * 0.85;
+        const rForce = -0.048 * n.rOffset;
+        n.vr = (n.vr + rForce) * 0.935;
         n.rOffset += n.vr;
 
-        const sForce = -0.16 * (n.scale - 1);
-        n.vScale = (n.vScale + sForce) * 0.82;
-        n.scale = Math.max(0.92, Math.min(1.2, n.scale + n.vScale));
+        const sForce = -0.075 * (n.scale - 1);
+        n.vScale = (n.vScale + sForce) * 0.91;
+        n.scale = Math.max(0.92, Math.min(1.22, n.scale + n.vScale));
+
+        const tForce = -0.08 * n.tilt;
+        n.vTilt = (n.vTilt + tForce) * 0.9;
+        n.tilt += n.vTilt;
 
         const el = domRefs.current[i];
         if (el) {
-          const finalR = n.baseRadius + n.rOffset + floatBob;
+          const finalR = n.baseRadius + n.rOffset + radialWave;
           const fx = Math.cos(n.angle) * finalR;
           const fy = Math.sin(n.angle) * finalR;
           el.style.transform = `translate3d(${fx.toFixed(1)}px, ${fy.toFixed(
             1
-          )}px, 0) scale(${n.scale.toFixed(3)})`;
+          )}px, 0) scale(${n.scale.toFixed(3)}) rotate(${n.tilt.toFixed(1)}deg)`;
         }
       }
     };
 
     const loop = () => {
       time += 1;
-      stepRingPhysics(ringIcons, iconNodeRefs, 0.84, 64);
-      stepRingPhysics(ringPills, pillNodeRefs, 0.86, 82);
-      stepRingPhysics(ringMsgs, msgNodeRefs, 0.9, 105);
+      stepFluidRingPhysics(ringIcons, iconNodeRefs, 0.85, 68);
+      stepFluidRingPhysics(ringPills, pillNodeRefs, 0.86, 86);
+      stepFluidRingPhysics(ringMsgs, msgNodeRefs, 0.9, 108);
       rafId = requestAnimationFrame(loop);
     };
 
     rafId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafId);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const handlePointerMove = (e) => {
@@ -556,9 +836,13 @@ function HeroCircularPortraitPhysicsArena({ photoSrc }) {
     const rect = arenaRef.current.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
+    const nx = e.clientX - cx;
+    const ny = e.clientY - cy;
     pointerRef.current = {
-      x: e.clientX - cx,
-      y: e.clientY - cy,
+      vx: nx - pointerRef.current.x,
+      vy: ny - pointerRef.current.y,
+      x: nx,
+      y: ny,
       active: true,
     };
   };
@@ -572,44 +856,53 @@ function HeroCircularPortraitPhysicsArena({ photoSrc }) {
       ref={arenaRef}
       onMouseMove={handlePointerMove}
       onMouseLeave={handlePointerLeave}
+      onTouchMove={(e) => {
+        if (e.touches?.[0]) {
+          handlePointerMove(e.touches[0]);
+        }
+      }}
+      onTouchEnd={handlePointerLeave}
       onClick={handlePointerMove}
-      className="relative ml-auto w-[380px] h-[380px] sm:w-[560px] sm:h-[560px] lg:w-[640px] lg:h-[640px] flex items-center justify-center select-none"
+      className="relative mx-auto lg:ml-auto w-[330px] h-[330px] sm:w-[580px] sm:h-[580px] lg:w-[660px] lg:h-[660px] flex items-center justify-center select-none"
     >
       <div
-        className="absolute inset-14 rounded-full blur-3xl opacity-65 pointer-events-none"
+        className="absolute inset-8 sm:inset-14 rounded-full blur-3xl opacity-65 pointer-events-none"
         style={{
           background:
             "radial-gradient(circle, rgba(201, 101, 65, 0.24) 0%, rgba(234, 227, 216, 0.65) 52%, rgba(244, 240, 234, 0) 80%)",
         }}
       />
 
-      <div className="absolute w-[230px] h-[230px] sm:w-[300px] sm:h-[300px] lg:w-[324px] lg:h-[324px] rounded-full border border-[#1E1916]/10 pointer-events-none" />
-      <div className="absolute w-[316px] h-[316px] sm:w-[420px] sm:h-[420px] lg:w-[456px] lg:h-[456px] rounded-full border border-dashed border-[#1E1916]/12 pointer-events-none" />
-      <div className="absolute w-[404px] h-[404px] sm:w-[544px] sm:h-[544px] lg:w-[592px] lg:h-[592px] rounded-full border border-[#1E1916]/8 pointer-events-none" />
+      <div className="absolute w-[176px] h-[176px] sm:w-[304px] sm:h-[304px] lg:w-[348px] lg:h-[348px] rounded-full border border-[#1E1916]/10 pointer-events-none" />
+      <div className="absolute w-[248px] h-[248px] sm:w-[424px] sm:h-[424px] lg:w-[484px] lg:h-[484px] rounded-full border border-dashed border-[#1E1916]/12 pointer-events-none" />
+      <div className="absolute w-[320px] h-[320px] sm:w-[548px] sm:h-[548px] lg:w-[620px] lg:h-[620px] rounded-full border border-[#1E1916]/8 pointer-events-none" />
 
-      <div className="relative w-44 h-44 sm:w-60 sm:h-60 lg:w-64 lg:h-64 rounded-full flex items-center justify-center z-10 pointer-events-none">
+      <div className="relative w-28 h-28 sm:w-56 sm:h-56 lg:w-60 lg:h-60 rounded-full flex items-center justify-center z-10 pointer-events-none">
         <img
           src={photoSrc}
           onError={(e) => {
             e.currentTarget.src = "/user.png";
           }}
           alt="Srinivasa Reddy Sanikommu"
-          className="w-44 h-44 sm:w-60 sm:h-60 lg:w-64 lg:h-64 object-cover object-top portrait-fade-circle"
+          className="w-28 h-28 sm:w-56 sm:h-56 lg:w-60 lg:h-60 object-cover object-top portrait-fade-circle"
         />
       </div>
 
-      {/* RING 1: 16 LARGER COLORFUL TECH STACK ICON PODS */}
+      {/* RING 1: 18 COLORFUL BRAND TECH STACK ICON PODS */}
       {COLORFUL_TECH_ICONS.map((item, idx) => (
         <div
           key={item.id}
           ref={(el) => (iconNodeRefs.current[idx] = el)}
+          title={item.id}
           style={{
             backgroundColor: item.bg,
             borderColor: item.border,
           }}
-          className="absolute top-1/2 left-1/2 -ml-6 -mt-6 w-11 h-11 sm:w-12 sm:h-12 rounded-full border-2 shadow-md flex items-center justify-center z-20 gpu cursor-pointer"
+          className="absolute top-1/2 left-1/2 -ml-4 -mt-4 sm:-ml-6 sm:-mt-6 w-8 h-8 sm:w-12 sm:h-12 rounded-full border-2 shadow-md flex items-center justify-center z-20 gpu cursor-pointer"
         >
-          {item.svg}
+          <div className="scale-75 sm:scale-100 flex items-center justify-center">
+            {item.svg}
+          </div>
         </div>
       ))}
 
@@ -620,32 +913,32 @@ function HeroCircularPortraitPhysicsArena({ photoSrc }) {
           ref={(el) => (pillNodeRefs.current[idx] = el)}
           className="absolute top-1/2 left-1/2 z-20 gpu cursor-pointer"
         >
-          <div className="-translate-x-1/2 -translate-y-1/2 px-3.5 py-1.5 rounded-full bg-[#EAE3D8] border border-[#1E1916]/20 shadow-sm font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#1E1916] whitespace-nowrap hover:border-[#C96541] hover:text-[#C96541] transition-colors">
+          <div className="-translate-x-1/2 -translate-y-1/2 px-2 py-0.5 sm:px-3.5 sm:py-1.5 rounded-full bg-[#EAE3D8] border border-[#1E1916]/20 shadow-sm font-mono text-[8px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#1E1916] whitespace-nowrap hover:border-[#C96541] hover:text-[#C96541] transition-colors">
             {label}
           </div>
         </div>
       ))}
 
-      {/* RING 3: 6 EXPANDED MESSAGE DIALOGUE BOXES */}
+      {/* RING 3: 6 FLOATING MESSAGE DIALOGUE BOXES */}
       {ORBIT_MESSAGE_DIALOGUES.map((msg, idx) => (
         <div
           key={msg.title}
           ref={(el) => (msgNodeRefs.current[idx] = el)}
-          className="absolute top-1/2 left-1/2 z-30 gpu cursor-pointer"
+          className="absolute top-1/2 left-1/2 z-20 gpu cursor-pointer"
         >
-          <div className="-translate-x-1/2 -translate-y-1/2 floating-pill px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl flex items-center gap-3 border border-[#1E1916]/15 hover:border-[#C96541] shadow-md transition-colors min-w-[155px] sm:min-w-[180px]">
+          <div className="-translate-x-1/2 -translate-y-1/2 floating-pill px-2.5 py-1.5 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl flex items-center gap-1.5 sm:gap-3 border border-[#1E1916]/15 hover:border-[#C96541] shadow-md transition-colors">
             <span
-              className="w-3 h-3 rounded-full shrink-0"
+              className="w-2 h-2 sm:w-3 sm:h-3 rounded-full shrink-0"
               style={{
                 backgroundColor: msg.dot,
                 boxShadow: `0 0 10px ${msg.dot}80`,
               }}
             />
             <div className="leading-tight">
-              <span className="font-mono text-[8.5px] sm:text-[9px] font-bold uppercase tracking-widest text-[#6E655F] block">
+              <span className="font-mono text-[6.5px] sm:text-[9px] font-bold uppercase tracking-widest text-[#6E655F] block">
                 {msg.tag}
               </span>
-              <span className="font-display text-xs sm:text-sm font-extrabold text-[#1E1916] whitespace-nowrap block mt-0.5">
+              <span className="font-display text-[9.5px] sm:text-sm font-extrabold text-[#1E1916] whitespace-nowrap block">
                 {msg.title}
               </span>
             </div>
@@ -672,12 +965,12 @@ function ShrunkCornerPortraitDock({ activeSection, scrolledPastHero, onJumpTop }
           animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
           exit={{ opacity: 0, scale: 0.4, y: 40 }}
           transition={{ type: "spring", stiffness: 220, damping: 22 }}
-          className="fixed top-20 right-4 sm:right-8 z-[8800]"
+          className="fixed top-20 right-3 sm:right-8 z-[8800]"
         >
           <button
             onClick={onJumpTop}
             title="Scroll to Top"
-            className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full flex items-center justify-center group"
+            className="relative w-20 h-20 sm:w-36 sm:h-36 rounded-full flex items-center justify-center group"
           >
             <div
               className="absolute inset-1 rounded-full blur-xl opacity-70 pointer-events-none"
@@ -701,7 +994,7 @@ function ShrunkCornerPortraitDock({ activeSection, scrolledPastHero, onJumpTop }
                 exit={{ opacity: 0, scale: 0.84 }}
                 transition={{ duration: 0.3 }}
                 alt="Srinivasa Reddy"
-                className="w-24 h-24 sm:w-32 sm:h-32 object-cover object-top portrait-fade-circle shadow-xl"
+                className="w-16 h-16 sm:w-32 sm:h-32 object-cover object-top portrait-fade-circle shadow-xl"
               />
             </AnimatePresence>
           </button>
@@ -712,17 +1005,74 @@ function ShrunkCornerPortraitDock({ activeSection, scrolledPastHero, onJumpTop }
 }
 
 // ============================================================================
-// CRYSTAL-CLEAR INTERACTIVE COMPANION MASCOT ("NOVA")
+// CINEMATIC, SLOW-PACED ARTICULATED MASCOT ("NOVA")
+// - Slow, deliberate movement across the viewport (3.2s to 3.8s travel)
+// - Richly articulated Walking (hip + knee + foot + torso bob + step dust puffs)
+// - Richly articulated Climbing (visible suction/ladder rungs + alternating reach)
+// - Richly articulated Squeezing (dual clamping pincer arms + compression sparks)
+// - Redesigned luxury Editorial Companion HUD Dialogue Box (closed at startup)
 // ============================================================================
 function NovaMascot({ activeSection, mascotMood, onQuickJump }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [actionState, setActionState] = useState("IDLE_PATROL");
+  // States: IDLE_PATROL | WALKING_CORNER | BONK_FALLEN | CLIMBING_WALL | SQUEEZE_TEXT
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [facing, setFacing] = useState(-1);
+  const [bodyRotation, setBodyRotation] = useState(0);
+  const [bodyScale, setBodyScale] = useState({ x: 1, y: 1 });
+  const [kinematics, setKinematics] = useState({
+    leftHip: 0,
+    leftKnee: 0,
+    rightHip: 0,
+    rightKnee: 0,
+    leftArm: 0,
+    rightArm: 0,
+    torsoBob: 0,
+    headTilt: 0,
+    squeezePulse: 0,
+  });
+  const [quips, setQuips] = useState("");
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
-  const mascotRef = useRef(null);
 
+  const mascotRef = useRef(null);
+  const activeTargetElRef = useRef(null);
+  const animRef = useRef({
+    tick: 0,
+    leftHip: 0,
+    leftKnee: 0,
+    rightHip: 0,
+    rightKnee: 0,
+    leftArm: 0,
+    rightArm: 0,
+    torsoBob: 0,
+    headTilt: 0,
+    squeezePulse: 0,
+  });
+
+  const releaseTargetText = () => {
+    if (activeTargetElRef.current) {
+      activeTargetElRef.current.classList.remove(
+        "mascot-squeezed-text",
+        "mascot-damaged-text"
+      );
+      activeTargetElRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setPos({
+      x: window.innerWidth - 164,
+      y: window.innerHeight - 164,
+    });
+    return () => releaseTargetText();
+  }, []);
+
+  // Eye tracking toward mouse cursor
   useEffect(() => {
     let rafId = null;
     const handleMouseMove = (e) => {
-      if (rafId) return;
+      if (window.innerWidth < 768 || rafId) return;
       rafId = requestAnimationFrame(() => {
         if (mascotRef.current) {
           const rect = mascotRef.current.getBoundingClientRect();
@@ -731,7 +1081,7 @@ function NovaMascot({ activeSection, mascotMood, onQuickJump }) {
           const dx = e.clientX - cx;
           const dy = e.clientY - cy;
           const angle = Math.atan2(dy, dx);
-          const dist = Math.min(3.2, Math.hypot(dx, dy) / 60);
+          const dist = Math.min(3.8, Math.hypot(dx, dy) / 65);
           setEyeOffset({
             x: Math.cos(angle) * dist,
             y: Math.sin(angle) * dist,
@@ -747,15 +1097,267 @@ function NovaMascot({ activeSection, mascotMood, onQuickJump }) {
     };
   }, []);
 
+  // Slow, deliberate, high-craft mischief routines
+  const runMischiefRoutine = (type) => {
+    if (typeof window === "undefined" || window.innerWidth < 768) return;
+    releaseTargetText();
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // 1. SQUEEZE_TEXT: Walks slowly to a visible heading, plants feet, clamps both arms, and slowly squeezes
+    if (type === "SQUEEZE_TEXT") {
+      const targets = Array.from(
+        document.querySelectorAll('[data-mascot-target="true"]')
+      ).filter((el) => {
+        const r = el.getBoundingClientRect();
+        return r.top > 100 && r.bottom < vh - 100 && r.width > 60;
+      });
+
+      if (targets.length > 0) {
+        const target = targets[Math.floor(Math.random() * targets.length)];
+        const rect = target.getBoundingClientRect();
+
+        setActionState("WALKING_CORNER");
+        const targetX = Math.min(vw - 156, Math.max(28, rect.right - 10));
+        const targetY = Math.min(vh - 156, Math.max(95, rect.top - 26));
+
+        setFacing(-1);
+        setBodyRotation(-4);
+        setBodyScale({ x: 1, y: 1 });
+        setPos({ x: targetX, y: targetY });
+        setQuips("Strolling over to inspect this typography... 🐾");
+
+        // Arrive after slow 3.2s walk
+        setTimeout(() => {
+          setActionState("SQUEEZE_TEXT");
+          setBodyScale({ x: 1.06, y: 0.94 });
+          setBodyRotation(-8);
+          activeTargetElRef.current = target;
+          target.classList.add("mascot-squeezed-text", "mascot-damaged-text");
+          setQuips("*HNNNNGH!* Slowly squeezing & compressing this heading! 🗜️✨");
+
+          // Hold the slow squeeze for 4.4s, then release and stroll home
+          setTimeout(() => {
+            releaseTargetText();
+            setBodyRotation(0);
+            setBodyScale({ x: 1, y: 1 });
+            setActionState("WALKING_CORNER");
+            setFacing(1);
+            setPos({ x: vw - 164, y: vh - 164 });
+            setQuips("Elastic typography test passed! Walking back~");
+
+            setTimeout(() => {
+              setFacing(-1);
+              setActionState("IDLE_PATROL");
+              setQuips("");
+            }, 3200);
+          }, 4400);
+        }, 3200);
+        return;
+      }
+    }
+
+    // 2. WALKING_CORNER: Slow, natural walk across the bottom edge & gentle corner tumble
+    if (type === "WALK_BONK_LEFT" || type === "WALK_BONK_RIGHT") {
+      const goLeft = type === "WALK_BONK_LEFT";
+      setActionState("WALKING_CORNER");
+      setFacing(goLeft ? -1 : 1);
+      setBodyRotation(goLeft ? -5 : 5);
+      setBodyScale({ x: 1.02, y: 0.98 });
+      setQuips(
+        goLeft
+          ? "Taking a slow, scenic walk to the left corner... 🚶"
+          : "Strolling over to the right corner... 🚶"
+      );
+
+      const crashX = goLeft ? 26 : vw - 152;
+      const floorY = vh - 160;
+      setPos({ x: crashX, y: floorY });
+
+      setTimeout(() => {
+        setActionState("BONK_FALLEN");
+        setBodyScale({ x: 0.92, y: 1.08 });
+        setBodyRotation(goLeft ? 82 : -82);
+        setPos({ x: goLeft ? 56 : vw - 182, y: floorY + 10 });
+        setQuips("*Bonk!* Reached the edge of the screen & tipped over! 💫");
+
+        setTimeout(() => {
+          setBodyRotation(0);
+          setBodyScale({ x: 1, y: 1 });
+          setActionState("WALKING_CORNER");
+          setFacing(1);
+          setPos({ x: vw - 164, y: vh - 164 });
+          setQuips("Dusted off and strolling back to base~");
+
+          setTimeout(() => {
+            setFacing(-1);
+            setActionState("IDLE_PATROL");
+            setQuips("");
+          }, 3200);
+        }, 3800);
+      }, 3300);
+      return;
+    }
+
+    // 3. CLIMBING_WALL: Slow, methodical hand-over-hand climb up the right margin
+    if (type === "CLIMB_MARGIN") {
+      setActionState("CLIMBING_WALL");
+      setFacing(1);
+      setBodyRotation(-8);
+      setPos({ x: vw - 148, y: 165 });
+      setQuips("Climbing slowly up the editorial margin rungs... 🧗");
+
+      setTimeout(() => {
+        setActionState("BONK_FALLEN");
+        setBodyRotation(75);
+        setPos({ x: vw - 164, y: vh - 156 });
+        setQuips("*Wheee!* Floated back down to the floor! 💫");
+
+        setTimeout(() => {
+          setBodyRotation(0);
+          setBodyScale({ x: 1, y: 1 });
+          setActionState("IDLE_PATROL");
+          setFacing(-1);
+          setQuips("");
+        }, 3400);
+      }, 3600);
+    }
+  };
+
+  // Unhurried autonomous schedule (every 17 seconds when dialogue is closed)
+  useEffect(() => {
+    const routines = [
+      "SQUEEZE_TEXT",
+      "WALK_BONK_LEFT",
+      "CLIMB_MARGIN",
+      "SQUEEZE_TEXT",
+      "WALK_BONK_RIGHT",
+    ];
+    let idx = 0;
+
+    const timer = setInterval(() => {
+      if (window.innerWidth < 768 || isOpen) return;
+      runMischiefRoutine(routines[idx % routines.length]);
+      idx += 1;
+    }, 17000);
+
+    const initialKick = setTimeout(() => {
+      if (window.innerWidth >= 768 && !isOpen) {
+        runMischiefRoutine("SQUEEZE_TEXT");
+      }
+    }, 5200);
+
+    return () => {
+      clearInterval(timer);
+      clearTimeout(initialKick);
+    };
+  }, [isOpen]);
+
+  // Slow, multi-jointed 60fps kinematic animation loop (Hip + Knee + Arm + Torso Bob + Squeeze)
+  useEffect(() => {
+    let raf;
+    const animateLimbs = () => {
+      const s = animRef.current;
+      s.tick += 1;
+
+      let tLeftHip = 0;
+      let tLeftKnee = 0;
+      let tRightHip = 0;
+      let tRightKnee = 0;
+      let tLeftArm = 0;
+      let tRightArm = 0;
+      let tTorsoBob = 0;
+      let tHeadTilt = 0;
+      let tSqueeze = 0;
+
+      if (actionState === "WALKING_CORNER") {
+        // Slow, natural walking gait cycle (0.065 rad/frame)
+        const w = s.tick * 0.065;
+        tLeftHip = Math.sin(w) * 18;
+        tLeftKnee = Math.max(0, Math.cos(w) * 16);
+        tRightHip = Math.sin(w + Math.PI) * 18;
+        tRightKnee = Math.max(0, Math.cos(w + Math.PI) * 16);
+        tLeftArm = Math.sin(w + Math.PI) * 15;
+        tRightArm = Math.sin(w) * 15;
+        tTorsoBob = Math.abs(Math.sin(w)) * -4.5;
+        tHeadTilt = Math.sin(w) * 3;
+      } else if (actionState === "CLIMBING_WALL") {
+        // Slow hand-over-hand ladder climbing cycle (0.055 rad/frame)
+        const c = s.tick * 0.055;
+        tLeftArm = -45 + Math.sin(c) * 26;
+        tRightArm = -45 + Math.sin(c + Math.PI) * 26;
+        tLeftHip = Math.sin(c + Math.PI) * 16;
+        tLeftKnee = 14 + Math.cos(c) * 10;
+        tRightHip = Math.sin(c) * 16;
+        tRightKnee = 14 + Math.cos(c + Math.PI) * 10;
+        tTorsoBob = Math.sin(c * 2) * -3;
+        tHeadTilt = -8;
+      } else if (actionState === "SQUEEZE_TEXT") {
+        // Slow rhythmic clamping & squeezing effort (0.05 rad/frame)
+        const sq = s.tick * 0.05;
+        tLeftArm = 42 + Math.sin(sq) * 12;
+        tRightArm = 36 + Math.sin(sq) * 12;
+        tLeftHip = -10;
+        tRightHip = 12;
+        tTorsoBob = Math.sin(sq) * 3.5;
+        tHeadTilt = -6 + Math.sin(sq) * 4;
+        tSqueeze = (Math.sin(sq) + 1) * 0.5;
+      } else if (actionState === "BONK_FALLEN") {
+        // Gentle leg wiggle while fallen
+        const b = s.tick * 0.05;
+        tLeftHip = Math.sin(b) * 8;
+        tRightHip = -Math.sin(b) * 8;
+        tLeftArm = 20;
+        tRightArm = -20;
+      } else {
+        // Calm idle breathing
+        const idle = s.tick * 0.028;
+        tTorsoBob = Math.sin(idle) * -2.2;
+        tLeftArm = Math.sin(idle) * 3;
+        tRightArm = -Math.sin(idle) * 3;
+        tHeadTilt = Math.cos(idle * 0.7) * 1.8;
+      }
+
+      // Smooth viscous lerp (0.08) so every transition between states is butter-smooth
+      const lerp = 0.08;
+      s.leftHip += (tLeftHip - s.leftHip) * lerp;
+      s.leftKnee += (tLeftKnee - s.leftKnee) * lerp;
+      s.rightHip += (tRightHip - s.rightHip) * lerp;
+      s.rightKnee += (tRightKnee - s.rightKnee) * lerp;
+      s.leftArm += (tLeftArm - s.leftArm) * lerp;
+      s.rightArm += (tRightArm - s.rightArm) * lerp;
+      s.torsoBob += (tTorsoBob - s.torsoBob) * lerp;
+      s.headTilt += (tHeadTilt - s.headTilt) * lerp;
+      s.squeezePulse += (tSqueeze - s.squeezePulse) * lerp;
+
+      setKinematics({
+        leftHip: s.leftHip,
+        leftKnee: s.leftKnee,
+        rightHip: s.rightHip,
+        rightKnee: s.rightKnee,
+        leftArm: s.leftArm,
+        rightArm: s.rightArm,
+        torsoBob: s.torsoBob,
+        headTilt: s.headTilt,
+        squeezePulse: s.squeezePulse,
+      });
+
+      raf = requestAnimationFrame(animateLimbs);
+    };
+    raf = requestAnimationFrame(animateLimbs);
+    return () => cancelAnimationFrame(raf);
+  }, [actionState]);
+
   const guideMessages = {
     hero: {
       badge: "CHAPTER 01 // INTRO",
-      title: "Hi! Touch the Revolving Orbit!",
-      text: "Move your cursor over the large tech icons or dialogue boxes on the right—they gently bounce back with smooth physics!",
+      title: "Nova Companion OS • Ready",
+      text: "I stroll around at a calm pace, climb the margin ladder, and playfully squeeze Srinivasa's headings! Trigger any animation below:",
     },
     works: {
       badge: "CHAPTER 02 // MY WORKS",
-      title: "4 Production Projects",
+      title: "4 Production Architectures",
       text: "Click any card to inspect OrderNow (with Stripe Connect), InsureAI, the LangGraph Resume Agent, or Enron AI.",
     },
     labs: {
@@ -777,42 +1379,131 @@ function NovaMascot({ activeSection, mascotMood, onQuickJump }) {
 
   const currentMsg = guideMessages[activeSection] || guideMessages.hero;
 
+  const stateBadgeLabel = {
+    IDLE_PATROL: "CALM PATROL",
+    WALKING_CORNER: "SLOW STROLL",
+    CLIMBING_WALL: "LADDER CLIMB",
+    SQUEEZE_TEXT: "SQUEEZING TEXT",
+    BONK_FALLEN: "CORNER TUMBLE",
+  }[actionState];
+
   return (
     <div
       ref={mascotRef}
-      className="fixed bottom-5 right-5 z-[8500] flex items-end gap-3 select-none"
+      style={{
+        transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
+        transition:
+          actionState === "WALKING_CORNER"
+            ? "transform 3.2s cubic-bezier(0.25, 1, 0.5, 1)"
+            : actionState === "CLIMBING_WALL"
+            ? "transform 3.5s cubic-bezier(0.22, 1, 0.36, 1)"
+            : actionState === "BONK_FALLEN"
+            ? "transform 1.05s cubic-bezier(0.34, 1.45, 0.64, 1)"
+            : "transform 2.6s cubic-bezier(0.22, 1, 0.36, 1)",
+      }}
+      className="hidden md:block fixed top-0 left-0 z-[8900] select-none gpu"
     >
-      <AnimatePresence mode="wait">
+      {/* Overhead Editorial Quip Pill (When Main Dialogue is Closed) */}
+      <AnimatePresence>
+        {!isOpen && (quips || mascotMood) && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.92 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            className="absolute -top-16 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-2 rounded-2xl bg-[#1E1916] text-[#F4F0EA] font-mono text-[11px] font-extrabold shadow-2xl border border-[#C96541] flex items-center gap-2"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#C96541] animate-ping" />
+            <span>{mascotMood || quips}</span>
+            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#1E1916] border-r border-b border-[#C96541] rotate-45" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ================================================================= */}
+      {/* ENHANCED EDITORIAL COMPANION HUD DIALOGUE BOX (CLOSED AT START)   */}
+      {/* ================================================================= */}
+      <AnimatePresence>
         {isOpen && (
           <motion.div
-            key={activeSection + mascotMood}
-            initial={{ opacity: 0, y: 12, scale: 0.94 }}
+            initial={{ opacity: 0, y: 18, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.94 }}
-            transition={{ duration: 0.22 }}
-            className="w-72 sm:w-80 rounded-2xl floating-pill p-4 space-y-2.5"
+            exit={{ opacity: 0, y: 12, scale: 0.94 }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute bottom-36 right-0 w-[340px] rounded-3xl bg-[#F4F0EA]/98 backdrop-blur-2xl p-5 space-y-4 shadow-[0_24px_60px_rgba(30,25,22,0.22)] border-2 border-[#1E1916]/15"
           >
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#C96541]/15 text-[#C96541] border border-[#C96541]/30">
-                {currentMsg.badge}
-              </span>
+            {/* Top Telemetry Header Bar */}
+            <div className="flex items-center justify-between border-b border-[#1E1916]/10 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse" />
+                <span className="font-mono text-[10px] font-extrabold uppercase tracking-wider text-[#1E1916]">
+                  NOVA COMPANION // {stateBadgeLabel}
+                </span>
+              </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-[#6E655F] hover:text-[#1E1916] text-xs font-mono font-bold"
+                className="p-1 rounded-lg bg-[#EAE3D8] text-[#6E655F] hover:text-[#1E1916] hover:bg-[#C96541]/20 transition-colors"
+                title="Minimize Dialogue"
               >
-                Hide
+                <Minimize2 className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            <div className="font-display text-sm font-extrabold text-[#1E1916]">
-              {mascotMood || currentMsg.title}
+            {/* Chapter Context Card */}
+            <div className="p-3.5 rounded-2xl bg-[#EAE3D8]/75 border border-[#1E1916]/10 space-y-1.5">
+              <span className="font-mono text-[9.5px] font-extrabold uppercase tracking-widest text-[#C96541] block">
+                {currentMsg.badge}
+              </span>
+              <div className="font-display text-base font-extrabold text-[#1E1916]">
+                {mascotMood || currentMsg.title}
+              </div>
+              <p className="text-xs text-[#6E655F] leading-relaxed font-medium">
+                {currentMsg.text}
+              </p>
             </div>
 
-            <p className="text-xs text-[#6E655F] leading-relaxed font-medium">
-              {currentMsg.text}
-            </p>
+            {/* Interactive Animation Studio Controls */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between font-mono text-[9.5px] font-extrabold uppercase tracking-wider text-[#6E655F]">
+                <span>PLAYFUL ANIMATION CONTROLS</span>
+                <span className="text-[#C96541]">SLOW &amp; FLUID</span>
+              </div>
+              <div className="grid grid-cols-3 gap-2 font-mono text-[10px]">
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    runMischiefRoutine("SQUEEZE_TEXT");
+                  }}
+                  className="py-2.5 px-2 rounded-xl bg-[#C96541] text-[#F4F0EA] font-extrabold hover:bg-[#1E1916] transition-all flex flex-col items-center gap-1 shadow-sm"
+                >
+                  <Zap className="w-3.5 h-3.5" />
+                  <span>Squeeze</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    runMischiefRoutine("WALK_BONK_LEFT");
+                  }}
+                  className="py-2.5 px-2 rounded-xl bg-[#EAE3D8] text-[#1E1916] border border-[#1E1916]/15 font-extrabold hover:border-[#C96541] transition-all flex flex-col items-center gap-1"
+                >
+                  <Footprints className="w-3.5 h-3.5 text-[#C96541]" />
+                  <span>Stroll</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    runMischiefRoutine("CLIMB_MARGIN");
+                  }}
+                  className="py-2.5 px-2 rounded-xl bg-[#1E1916] text-[#F4F0EA] font-extrabold hover:bg-[#C96541] transition-all flex flex-col items-center gap-1"
+                >
+                  <Mountain className="w-3.5 h-3.5" />
+                  <span>Climb</span>
+                </button>
+              </div>
+            </div>
 
-            <div className="pt-1 flex flex-wrap gap-1.5">
+            {/* Quick Section Jump Bar */}
+            <div className="pt-2 border-t border-[#1E1916]/10 flex flex-wrap gap-1.5">
               {[
                 { id: "works", label: "Works" },
                 { id: "labs", label: "Live Labs" },
@@ -822,7 +1513,7 @@ function NovaMascot({ activeSection, mascotMood, onQuickJump }) {
                 <button
                   key={tab.id}
                   onClick={() => onQuickJump(tab.id)}
-                  className={`font-mono text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${
+                  className={`font-mono text-[10px] px-3 py-1 rounded-full border transition-colors ${
                     activeSection === tab.id
                       ? "bg-[#C96541] text-[#F4F0EA] border-[#C96541] font-extrabold"
                       : "bg-[#EAE3D8] text-[#1E1916] border-[#1E1916]/15 hover:border-[#C96541]"
@@ -836,88 +1527,483 @@ function NovaMascot({ activeSection, mascotMood, onQuickJump }) {
         )}
       </AnimatePresence>
 
+      {/* ================================================================= */}
+      {/* MULTI-JOINTED ARTICULATED ROBOT MASCOT SVG                        */}
+      {/* ================================================================= */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        title="Toggle Nova Guide"
-        className="group relative w-20 h-20 rounded-2xl bg-[#EAE3D8] border-2 border-[#C96541] shadow-xl flex items-center justify-center animate-float gpu"
+        title="Click Nova to open Companion Studio!"
+        style={{
+          transform: `rotate(${bodyRotation}deg) scaleX(${
+            bodyScale.x * (facing === 1 ? -1 : 1)
+          }) scaleY(${bodyScale.y})`,
+          transition: "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)",
+        }}
+        className="group relative w-32 h-32 flex items-center justify-center focus:outline-none"
       >
-        <svg viewBox="0 0 100 100" className="w-16 h-16 overflow-visible">
-          <circle
-            cx="50"
-            cy="88"
-            r="6"
-            fill="#C96541"
-            opacity="0.55"
-            className="animate-ping"
-          />
-          <path d="M 44 82 L 50 95 L 56 82 Z" fill="#C96541" />
+        <svg viewBox="0 0 130 130" className="w-32 h-32 overflow-visible">
+          <defs>
+            <radialGradient id="novaBodyLarge" cx="50%" cy="35%" r="60%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="70%" stopColor="#F4F0EA" />
+              <stop offset="100%" stopColor="#DFD5C6" />
+            </radialGradient>
+            <radialGradient id="novaVisorLarge" cx="50%" cy="35%" r="65%">
+              <stop offset="0%" stopColor="#2D2521" />
+              <stop offset="100%" stopColor="#14110F" />
+            </radialGradient>
+            <filter
+              id="novaDropShadow"
+              x="-25%"
+              y="-20%"
+              width="150%"
+              height="150%"
+            >
+              <feDropShadow
+                dx="0"
+                dy="8"
+                stdDeviation="6"
+                floodColor="#1E1916"
+                floodOpacity="0.22"
+              />
+            </filter>
+          </defs>
 
-          <line
-            x1="50"
-            y1="8"
-            x2="50"
-            y2="19"
-            stroke="#1E1916"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          <circle cx="50" cy="7" r="4.5" fill="#C96541" />
+          {/* Visible Climbing Ladder Rungs when CLIMBING_WALL */}
+          {actionState === "CLIMBING_WALL" && (
+            <g opacity="0.65">
+              <line
+                x1="34"
+                y1="10"
+                x2="34"
+                y2="122"
+                stroke="#C96541"
+                strokeWidth="2.5"
+                strokeDasharray="6 6"
+              />
+              <line
+                x1="96"
+                y1="10"
+                x2="96"
+                y2="122"
+                stroke="#C96541"
+                strokeWidth="2.5"
+                strokeDasharray="6 6"
+              />
+              {[24, 48, 72, 96, 114].map((ry) => (
+                <line
+                  key={ry}
+                  x1="34"
+                  y1={ry}
+                  x2="96"
+                  y2={ry}
+                  stroke="#1E1916"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              ))}
+            </g>
+          )}
 
-          <rect x="14" y="32" width="7" height="16" rx="3.5" fill="#C96541" />
-          <rect x="79" y="32" width="7" height="16" rx="3.5" fill="#C96541" />
-
-          <rect
-            x="19"
-            y="18"
-            width="62"
-            height="44"
-            rx="20"
-            fill="#F4F0EA"
-            stroke="#1E1916"
-            strokeWidth="2.5"
-          />
-
-          <rect
-            x="25"
-            y="24"
-            width="50"
-            height="32"
-            rx="14"
+          {/* Ground Shadow + Walking Step Dust Puffs */}
+          <ellipse
+            cx="65"
+            cy="118"
+            rx="28"
+            ry="5.5"
             fill="#1E1916"
+            opacity="0.16"
           />
+          {actionState === "WALKING_CORNER" && (
+            <g opacity="0.45">
+              <circle
+                cx={88 + kinematics.leftHip * 0.4}
+                cy="114"
+                r="4.5"
+                fill="#EAE3D8"
+                stroke="#6E655F"
+                strokeWidth="1"
+              />
+              <circle
+                cx={98 + kinematics.rightHip * 0.4}
+                cy="111"
+                r="3"
+                fill="#EAE3D8"
+              />
+            </g>
+          )}
 
+          {/* Compression Effort Sparks when SQUEEZE_TEXT */}
+          {actionState === "SQUEEZE_TEXT" && (
+            <g opacity={0.45 + kinematics.squeezePulse * 0.55}>
+              <path
+                d="M 4 44 L 14 48 M 6 58 L 16 56 M 10 32 L 18 39"
+                stroke="#C96541"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <circle
+                cx="10"
+                cy="50"
+                r={5 + kinematics.squeezePulse * 4}
+                fill="none"
+                stroke="#C96541"
+                strokeWidth="2"
+              />
+            </g>
+          )}
+
+          {/* Dizzy Stars when BONK_FALLEN */}
+          {actionState === "BONK_FALLEN" && (
+            <g>
+              <circle cx="36" cy="14" r="4" fill="#D97706" />
+              <circle cx="65" cy="8" r="5" fill="#C96541" />
+              <circle cx="94" cy="14" r="4" fill="#2A6B53" />
+              <path
+                d="M 34 14 Q 65 2 96 14"
+                stroke="#C96541"
+                strokeWidth="1.8"
+                strokeDasharray="4 4"
+                fill="none"
+              />
+            </g>
+          )}
+
+          {/* Whole Upper & Lower Body with Smooth Torso Bob */}
           <g
+            filter="url(#novaDropShadow)"
             style={{
-              transform: `translate3d(${eyeOffset.x}px, ${eyeOffset.y}px, 0)`,
+              transform: `translateY(${kinematics.torsoBob}px)`,
             }}
           >
-            <circle cx="40" cy="39" r="5" fill="#F4F0EA" />
-            <circle cx="60" cy="39" r="5" fill="#F4F0EA" />
-            <path
-              d="M 45 47 Q 50 51 55 47"
-              stroke="#C96541"
+            {/* MULTI-JOINTED LEFT LEG (Hip + Knee + Foot) */}
+            <g
+              style={{
+                transform: `rotate(${kinematics.leftHip}deg)`,
+                transformOrigin: "52px 88px",
+              }}
+            >
+              <rect
+                x="46"
+                y="86"
+                width="12"
+                height="15"
+                rx="6"
+                fill="#EAE3D8"
+                stroke="#1E1916"
+                strokeWidth="2.4"
+              />
+              <g
+                style={{
+                  transform: `rotate(${kinematics.leftKnee}deg)`,
+                  transformOrigin: "52px 100px",
+                }}
+              >
+                <rect
+                  x="47"
+                  y="98"
+                  width="10"
+                  height="12"
+                  rx="5"
+                  fill="#F4F0EA"
+                  stroke="#1E1916"
+                  strokeWidth="2.2"
+                />
+                <ellipse
+                  cx="50"
+                  cy="111"
+                  rx="9.5"
+                  ry="5"
+                  fill="#C96541"
+                  stroke="#1E1916"
+                  strokeWidth="2.2"
+                />
+              </g>
+            </g>
+
+            {/* MULTI-JOINTED RIGHT LEG (Hip + Knee + Foot) */}
+            <g
+              style={{
+                transform: `rotate(${kinematics.rightHip}deg)`,
+                transformOrigin: "78px 88px",
+              }}
+            >
+              <rect
+                x="72"
+                y="86"
+                width="12"
+                height="15"
+                rx="6"
+                fill="#EAE3D8"
+                stroke="#1E1916"
+                strokeWidth="2.4"
+              />
+              <g
+                style={{
+                  transform: `rotate(${kinematics.rightKnee}deg)`,
+                  transformOrigin: "78px 100px",
+                }}
+              >
+                <rect
+                  x="73"
+                  y="98"
+                  width="10"
+                  height="12"
+                  rx="5"
+                  fill="#F4F0EA"
+                  stroke="#1E1916"
+                  strokeWidth="2.2"
+                />
+                <ellipse
+                  cx="80"
+                  cy="111"
+                  rx="9.5"
+                  ry="5"
+                  fill="#C96541"
+                  stroke="#1E1916"
+                  strokeWidth="2.2"
+                />
+              </g>
+            </g>
+
+            {/* ARTICULATED LEFT ARM + CLAMPING GRIPPER HAND */}
+            <g
+              style={{
+                transform: `rotate(${kinematics.leftArm}deg)`,
+                transformOrigin: "35px 68px",
+              }}
+            >
+              <path
+                d="M 35 68 Q 16 64 14 50"
+                stroke="#1E1916"
+                strokeWidth="6.5"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <circle
+                cx="14"
+                cy="50"
+                r="6.5"
+                fill="#C96541"
+                stroke="#1E1916"
+                strokeWidth="2.2"
+              />
+            </g>
+
+            {/* ARTICULATED RIGHT ARM + CLAMPING GRIPPER HAND */}
+            <g
+              style={{
+                transform: `rotate(${kinematics.rightArm}deg)`,
+                transformOrigin: "95px 68px",
+              }}
+            >
+              <path
+                d={
+                  actionState === "SQUEEZE_TEXT"
+                    ? "M 95 68 Q 55 76 18 62"
+                    : "M 95 68 Q 112 72 114 84"
+                }
+                stroke="#1E1916"
+                strokeWidth="6.5"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <circle
+                cx={actionState === "SQUEEZE_TEXT" ? "18" : "114"}
+                cy={actionState === "SQUEEZE_TEXT" ? "62" : "84"}
+                r="6.5"
+                fill="#C96541"
+                stroke="#1E1916"
+                strokeWidth="2.2"
+              />
+            </g>
+
+            {/* Torso / Chest Core */}
+            <rect
+              x="41"
+              y="66"
+              width="48"
+              height="25"
+              rx="10"
+              fill="url(#novaBodyLarge)"
+              stroke="#1E1916"
               strokeWidth="2.5"
-              strokeLinecap="round"
-              fill="none"
             />
+            <rect
+              x="51"
+              y="72"
+              width="28"
+              height="13"
+              rx="4.5"
+              fill="#EAE3D8"
+              stroke="#1E1916"
+              strokeWidth="1.8"
+            />
+            <circle cx="58" cy="78.5" r="2.6" fill="#2A6B53" />
+            <circle cx="65" cy="78.5" r="2.6" fill="#C96541" />
+            <circle cx="72" cy="78.5" r="2.6" fill="#3B4CCA" />
+
+            {/* Articulated Head & Helmet Group */}
+            <g
+              style={{
+                transform: `rotate(${kinematics.headTilt}deg)`,
+                transformOrigin: "65px 52px",
+              }}
+            >
+              {/* Antenna */}
+              <line
+                x1="65"
+                y1="22"
+                x2="65"
+                y2="8"
+                stroke="#1E1916"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+              />
+              <circle
+                cx="65"
+                cy="7"
+                r="5.5"
+                fill="#C96541"
+                stroke="#1E1916"
+                strokeWidth="2"
+              />
+
+              {/* Side Ear Modules */}
+              <rect
+                x="21"
+                y="36"
+                width="9"
+                height="20"
+                rx="4.5"
+                fill="#C96541"
+                stroke="#1E1916"
+                strokeWidth="2.2"
+              />
+              <rect
+                x="100"
+                y="36"
+                width="9"
+                height="20"
+                rx="4.5"
+                fill="#C96541"
+                stroke="#1E1916"
+                strokeWidth="2.2"
+              />
+
+              {/* Main Helmet Shell */}
+              <rect
+                x="28"
+                y="20"
+                width="74"
+                height="50"
+                rx="24"
+                fill="url(#novaBodyLarge)"
+                stroke="#1E1916"
+                strokeWidth="2.8"
+              />
+
+              {/* Visor Screen */}
+              <rect
+                x="36"
+                y="28"
+                width="58"
+                height="34"
+                rx="15"
+                fill="url(#novaVisorLarge)"
+                stroke="#1E1916"
+                strokeWidth="2"
+              />
+
+              {/* Visor Gloss */}
+              <path
+                d="M 43 33 Q 53 30 63 33"
+                stroke="rgba(255,255,255,0.35)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                fill="none"
+              />
+
+              {/* Expressive Eyes & Mouth inside Visor */}
+              <g
+                style={{
+                  transform: `translate3d(${eyeOffset.x}px, ${eyeOffset.y}px, 0)`,
+                }}
+              >
+                {actionState === "BONK_FALLEN" ? (
+                  <>
+                    <path
+                      d="M 47 40 L 55 48 M 55 40 L 47 48"
+                      stroke="#F4F0EA"
+                      strokeWidth="2.8"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 75 40 L 83 48 M 83 40 L 75 48"
+                      stroke="#F4F0EA"
+                      strokeWidth="2.8"
+                      strokeLinecap="round"
+                    />
+                    <circle
+                      cx="65"
+                      cy="55"
+                      r="4"
+                      fill="none"
+                      stroke="#C96541"
+                      strokeWidth="2.4"
+                    />
+                  </>
+                ) : actionState === "SQUEEZE_TEXT" ? (
+                  <>
+                    <path
+                      d="M 44 38 L 57 43"
+                      stroke="#C96541"
+                      strokeWidth="2.8"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="51" cy="45" r="5" fill="#F4F0EA" />
+                    <circle cx="51" cy="45" r="2.2" fill="#C96541" />
+
+                    <path
+                      d="M 86 38 L 73 43"
+                      stroke="#C96541"
+                      strokeWidth="2.8"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="79" cy="45" r="5" fill="#F4F0EA" />
+                    <circle cx="79" cy="45" r="2.2" fill="#C96541" />
+
+                    <path
+                      d="M 53 54 Q 65 50 77 54"
+                      stroke="#C96541"
+                      strokeWidth="2.8"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <circle cx="51" cy="44" r="6" fill="#F4F0EA" />
+                    <circle cx="52.5" cy="43" r="2.5" fill="#C96541" />
+                    <circle cx="53.5" cy="41.8" r="1" fill="#FFFFFF" />
+
+                    <circle cx="79" cy="44" r="6" fill="#F4F0EA" />
+                    <circle cx="80.5" cy="43" r="2.5" fill="#C96541" />
+                    <circle cx="81.5" cy="41.8" r="1" fill="#FFFFFF" />
+
+                    <path
+                      d="M 55 54 Q 65 59 75 54"
+                      stroke="#C96541"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                  </>
+                )}
+              </g>
+            </g>
           </g>
-
-          <rect
-            x="32"
-            y="62"
-            width="36"
-            height="20"
-            rx="8"
-            fill="#F4F0EA"
-            stroke="#1E1916"
-            strokeWidth="2.2"
-          />
-          <rect x="43" y="67" width="14" height="9" rx="3" fill="#C96541" />
         </svg>
-
-        <span className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-[#C96541] text-[#F4F0EA] font-mono text-[9px] font-extrabold shadow">
-          NOVA
-        </span>
       </button>
     </div>
   );
@@ -950,8 +2036,19 @@ const PROJECTS = [
       { label: "WEBHOOK SAFETY", value: "Signature Verified" },
       { label: "CONCURRENCY", value: "Zero Double-Orders" },
     ],
-    quickStory:
-      "Built to power a real multi-vendor delivery marketplace where restaurants onboard with Stripe Connect, customers check out smoothly, and payouts split automatically.",
+    quickStory: (
+      <>
+        Built to power a real multi-vendor delivery marketplace where restaurants onboard with{" "}
+        <ReelHighlight tone="terracotta" delay={0.1}>
+          Stripe Connect
+        </ReelHighlight>
+        , customers check out smoothly, and{" "}
+        <ReelHighlight tone="sage" variant="underline" delay={0.2}>
+          payouts split automatically
+        </ReelHighlight>
+        .
+      </>
+    ),
     summary:
       "A complete multi-vendor food, grocery, and table reservation platform. I engineered the backend architecture for vendor onboarding via Stripe Connect, automated merchant split-payouts, real-time cart and order tracking, and webhook-verified payment status updates that stay reliable even under heavy simultaneous traffic.",
     steps: [
@@ -1023,8 +2120,19 @@ const session = await stripe.checkout.sessions.create({
       { label: "BASE AVERAGE", value: "$13,270 / yr" },
       { label: "AI GUIDANCE", value: "Personalized Tips" },
     ],
-    quickStory:
-      "Connects a React & Node.js web app to a Python Flask machine learning service so anyone can estimate insurance costs in seconds.",
+    quickStory: (
+      <>
+        Connects a React &amp; Node.js web app to a{" "}
+        <ReelHighlight tone="sage" delay={0.12}>
+          Python Flask ML service
+        </ReelHighlight>{" "}
+        so anyone can estimate{" "}
+        <ReelHighlight tone="terracotta" variant="underline" delay={0.22}>
+          insurance costs in seconds
+        </ReelHighlight>
+        .
+      </>
+    ),
     summary:
       "A 3-tier web application that combines a friendly React dashboard, a Node.js/Express API gateway, and a Python Flask machine learning microservice. It predicts annual health insurance premiums using a trained Scikit-Learn regression model and explains how lifestyle factors affect your price.",
     steps: [
@@ -1095,8 +2203,19 @@ export const predictInsurancePremium = async (req, res) => {
       { label: "STRUCTURED DATA", value: "Pydantic v2 JSON" },
       { label: "CONSISTENCY", value: "0.2 Temperature" },
     ],
-    quickStory:
-      "An AI agent that reads your PDF resume, scores it against a job description, and automatically picks the most helpful next step.",
+    quickStory: (
+      <>
+        An AI agent built with{" "}
+        <ReelHighlight tone="amber" delay={0.14}>
+          LangGraph StateGraph
+        </ReelHighlight>{" "}
+        that scores your PDF resume and{" "}
+        <ReelHighlight tone="terracotta" variant="underline" delay={0.24}>
+          routes your next step
+        </ReelHighlight>{" "}
+        automatically.
+      </>
+    ),
     summary:
       "Instead of a basic one-prompt chatbot, I built a stateful multi-step AI agent using LangGraph. It extracts text from a PDF resume, calculates an ATS match score against your target job, and routes you down one of two paths: a step-by-step resume fix plan (if under 70%) or custom technical interview questions (if 70% or above).",
     steps: [
@@ -1160,8 +2279,19 @@ workflow.add_conditional_edges("analyze_resume", route_based_on_score)`,
       { label: "PEAK ACCURACY", value: "88.9% Accuracy" },
       { label: "RARE-CLASS BOOST", value: "10.5% -> 68.4%" },
     ],
-    quickStory:
-      "Trained on 2,105 real emails from the 1.43 GB Enron dataset to sort messages into 5 folders without missing rare personal emails.",
+    quickStory: (
+      <>
+        Trained on 2,105 real emails from the{" "}
+        <ReelHighlight tone="terracotta" delay={0.16}>
+          1.43 GB Enron dataset
+        </ReelHighlight>{" "}
+        to reach{" "}
+        <ReelHighlight tone="sage" variant="underline" delay={0.26}>
+          88.9% classification accuracy
+        </ReelHighlight>
+        .
+      </>
+    ),
     summary:
       "Real-world email datasets are heavily unbalanced—Work emails outnumbered Personal emails 7-to-1. I trained and compared three machine learning pipelines (Baseline, Class Weighting, and Oversampling) to raise Personal email detection from 10.5% to 68.4% and reach 88.9% overall accuracy.",
     steps: [
@@ -1195,7 +2325,7 @@ experiment_results = {
 ];
 
 // ============================================================================
-// CLEAR, VISUAL JOURNEY TIMELINE MILESTONES (2X HACKATHON WINNER REMOVED)
+// CLEAR, VISUAL JOURNEY TIMELINE MILESTONES WITH DYNAMIC REEL HIGHLIGHTS
 // ============================================================================
 const JOURNEY_MILESTONES = [
   {
@@ -1206,8 +2336,19 @@ const JOURNEY_MILESTONES = [
     place: "Sri Chaitanya Junior College, Narasaraopet",
     icon: GraduationCap,
     highlight: "95.0% Score",
-    summary:
-      "Built a rock-solid foundation in Mathematics, Physics, and Chemistry. Graduating with 95% sparked my love for logical problem-solving and algorithmic thinking.",
+    summary: (
+      <>
+        Built a rock-solid foundation in Mathematics, Physics, and Chemistry. Graduating with{" "}
+        <ReelHighlight tone="terracotta" delay={0.1}>
+          95.0% distinction
+        </ReelHighlight>{" "}
+        sparked my passion for{" "}
+        <ReelHighlight tone="sage" variant="underline" delay={0.2}>
+          algorithmic problem-solving
+        </ReelHighlight>
+        .
+      </>
+    ),
     tags: ["Mathematics", "Physics", "Analytical Problem Solving", "95% Distinction"],
   },
   {
@@ -1218,8 +2359,19 @@ const JOURNEY_MILESTONES = [
     place: "R.V.R. & J.C. College of Engineering, Guntur (Class of 2027)",
     icon: Cpu,
     highlight: "CSE • AI & ML",
-    summary:
-      "Dived deep into Data Structures & Algorithms, Object-Oriented Design, Operating Systems, DBMS, Computer Networks, and Machine Learning while building full-stack web apps.",
+    summary: (
+      <>
+        Dived deep into{" "}
+        <ReelHighlight tone="linen" delay={0.1}>
+          Data Structures &amp; Algorithms
+        </ReelHighlight>
+        , Object-Oriented Design, Operating Systems, DBMS, and{" "}
+        <ReelHighlight tone="terracotta" variant="underline" delay={0.2}>
+          Machine Learning
+        </ReelHighlight>{" "}
+        while building full-stack web apps.
+      </>
+    ),
     tags: ["DSA", "OOP", "DBMS", "Operating Systems", "AI & Machine Learning"],
   },
   {
@@ -1230,8 +2382,19 @@ const JOURNEY_MILESTONES = [
     place: "Technical Symposiums & National Engineering Competitions",
     icon: Trophy,
     highlight: "2× 1st Prize Wins",
-    summary:
-      "Won 1st Prize in the Advertisement Creation Using AI Tools competition and 1st Prize in the Automations Building Competition, while participating in national engineering challenges including Flipkart GRiD 8.0 and Statathon 2025.",
+    summary: (
+      <>
+        Won{" "}
+        <ReelHighlight tone="terracotta" delay={0.1}>
+          1st Prize in AI Advertisement Creation
+        </ReelHighlight>{" "}
+        and{" "}
+        <ReelHighlight tone="amber" delay={0.2}>
+          1st Prize in Automations Building
+        </ReelHighlight>
+        , while competing in national challenges like Flipkart GRiD 8.0 and Statathon 2025.
+      </>
+    ),
     tags: [
       "1st Prize: AI Advertisement Creation",
       "1st Prize: Automations Building",
@@ -1247,8 +2410,19 @@ const JOURNEY_MILESTONES = [
     place: "KriBud Web Tech",
     icon: Briefcase,
     highlight: "35% Faster APIs",
-    summary:
-      "Designed and shipped production Node.js, Express, and MongoDB backend services for multi-vendor ordering (OrderNow), Stripe Connect vendor onboarding, and webhook payment flows. Refactored MongoDB compound indexes and aggregation pipelines to cut API latency by 35%.",
+    summary: (
+      <>
+        Designed and shipped production Node.js, Express, and MongoDB services for{" "}
+        <ReelHighlight tone="linen" delay={0.1}>
+          Stripe Connect vendor onboarding
+        </ReelHighlight>{" "}
+        and refactored compound indexes to{" "}
+        <ReelHighlight tone="terracotta" variant="underline" delay={0.2}>
+          cut API latency by 35%
+        </ReelHighlight>
+        .
+      </>
+    ),
     tags: [
       "Node.js & Express",
       "MongoDB Optimization (-35% Latency)",
@@ -1264,8 +2438,19 @@ const JOURNEY_MILESTONES = [
     place: "Guntur, Andhra Pradesh • Open to High-Impact Roles",
     icon: Sparkles,
     highlight: "Full-Stack + AI",
-    summary:
-      "Combining scalable Node.js & Python backends with Scikit-Learn ML microservices (InsureAI) and stateful LangGraph AI agents (Resume Evaluator) to build software that feels fast, smart, and reliable.",
+    summary: (
+      <>
+        Combining scalable Node.js &amp; Python backends with{" "}
+        <ReelHighlight tone="sage" delay={0.1}>
+          Scikit-Learn ML microservices
+        </ReelHighlight>{" "}
+        and stateful{" "}
+        <ReelHighlight tone="terracotta" variant="underline" delay={0.2}>
+          LangGraph AI agents
+        </ReelHighlight>{" "}
+        to build fast, reliable software.
+      </>
+    ),
     tags: ["LangGraph Agents", "Python Flask ML", "React 19", "System Design"],
   },
 ];
@@ -1280,8 +2465,19 @@ const COMPETITION_WINS = [
     title: "Advertisement Creation Using AI Tools",
     category: "Generative AI & Creative Prompt Engineering",
     icon: Wand2,
-    description:
-      "Won 1st Prize for conceptualizing, scripting, and producing a high-impact commercial advertisement end-to-end using generative AI tools, visual synthesis, and creative prompt engineering workflows.",
+    description: (
+      <>
+        Won 1st Prize for conceptualizing, scripting, and producing a{" "}
+        <ReelHighlight tone="terracotta" delay={0.1}>
+          high-impact commercial advertisement
+        </ReelHighlight>{" "}
+        end-to-end using generative AI tools, visual synthesis, and{" "}
+        <ReelHighlight tone="linen" variant="underline" delay={0.2}>
+          prompt engineering workflows
+        </ReelHighlight>
+        .
+      </>
+    ),
     skills: ["Generative AI Tools", "Prompt Engineering", "AI Ad Production", "Creative Direction"],
   },
   {
@@ -1290,8 +2486,19 @@ const COMPETITION_WINS = [
     title: "Automations Building Competition",
     category: "Intelligent Workflows & Systems Automation",
     icon: Workflow,
-    description:
-      "Won 1st Prize for designing and building an end-to-end automated workflow pipeline that eliminated manual steps through smart event triggers, API integrations, and autonomous task execution.",
+    description: (
+      <>
+        Won 1st Prize for designing and building an{" "}
+        <ReelHighlight tone="sage" delay={0.14}>
+          end-to-end automated workflow pipeline
+        </ReelHighlight>{" "}
+        that eliminated manual steps through smart event triggers and{" "}
+        <ReelHighlight tone="terracotta" variant="underline" delay={0.24}>
+          autonomous task execution
+        </ReelHighlight>
+        .
+      </>
+    ),
     skills: ["Workflow Automation", "API Integrations", "Smart Triggers", "System Efficiency"],
   },
 ];
@@ -1381,8 +2588,17 @@ function OrderNowStripeSimulator({ onCelebrate }) {
               SIMULATION ONLY • NOT ACTUAL BEHAVIOUR
             </span>
           </div>
-          <h3 className="font-display text-2xl md:text-3xl font-extrabold text-[#1E1916] mt-1">
-            Stripe Connect Split-Payout &amp; Concurrency Simulator
+          <h3
+            data-mascot-target="true"
+            className="font-display text-2xl md:text-3xl font-extrabold text-[#1E1916] mt-1"
+          >
+            <ReelHighlight tone="linen" isHeading delay={0.1}>
+              Stripe Connect
+            </ReelHighlight>{" "}
+            Split-Payout &amp;{" "}
+            <ReelHighlight tone="terracotta" variant="underline" isHeading delay={0.25}>
+              Concurrency Simulator
+            </ReelHighlight>
           </h3>
         </div>
         <div className="flex items-center gap-2 font-mono text-xs px-3.5 py-1.5 rounded-full bg-[#F4F0EA] border border-[#1E1916]/15 text-[#1E1916] font-bold">
@@ -1566,8 +2782,14 @@ function AIPlaygroundsRow({ onCelebrate }) {
                 SIMULATION ONLY
               </span>
             </div>
-            <h4 className="font-display text-xl font-extrabold text-[#1E1916] mt-0.5">
-              Health Insurance Cost Estimator
+            <h4
+              data-mascot-target="true"
+              className="font-display text-xl font-extrabold text-[#1E1916] mt-0.5"
+            >
+              Health Insurance{" "}
+              <ReelHighlight tone="sage" variant="underline" isHeading delay={0.15}>
+                Cost Estimator
+              </ReelHighlight>
             </h4>
           </div>
           <div className="font-mono text-xl font-extrabold text-[#C96541]">
@@ -1655,8 +2877,14 @@ function AIPlaygroundsRow({ onCelebrate }) {
                 SIMULATION ONLY
               </span>
             </div>
-            <h4 className="font-display text-xl font-extrabold text-[#1E1916] mt-0.5">
-              70% ATS Score Conditional Router
+            <h4
+              data-mascot-target="true"
+              className="font-display text-xl font-extrabold text-[#1E1916] mt-0.5"
+            >
+              70% ATS Score{" "}
+              <ReelHighlight tone="amber" variant="underline" isHeading delay={0.18}>
+                Conditional Router
+              </ReelHighlight>
             </h4>
           </div>
           <span className="font-mono text-lg font-extrabold px-3 py-1 rounded-xl border border-[#C96541]/40 bg-[#C96541]/15 text-[#C96541]">
@@ -1824,7 +3052,7 @@ export default function App() {
           >
             <span className="w-2.5 h-2.5 rounded-full bg-[#C96541] group-hover:scale-125 transition-transform" />
             <span className="font-display font-extrabold text-sm sm:text-base text-[#1E1916] tracking-tight">
-              SRINIVASA<span className="text-[#C96541]">.DEV</span>
+              SRINIVASAREDDY<span className="text-[#C96541]">.DEV</span>
             </span>
           </button>
 
@@ -1889,14 +3117,14 @@ export default function App() {
         </AnimatePresence>
       </header>
 
-      {/* Larger Top-Right Shrinking Portrait Dock */}
+      {/* Top-Right Shrinking Portrait Dock */}
       <ShrunkCornerPortraitDock
         activeSection={activeSection}
         scrolledPastHero={scrolledPastHero}
         onJumpTop={() => scrollToSection("hero")}
       />
 
-      {/* NOVA — Interactive Companion Mascot */}
+      {/* NOVA — Slow, Articulated Mascot with Upgraded Companion Dialogue Box */}
       <NovaMascot
         activeSection={activeSection}
         mascotMood={mascotMood}
@@ -1905,61 +3133,97 @@ export default function App() {
 
       {/* =================================================================== */}
       {/* CHAPTER 01: PERSONAL PORTFOLIO HERO                                 */}
+      {/* - Generous gap between Name column & Profile Photo column           */}
+      {/* - Interleaved Z-Index Stacking:                                     */}
+      {/*   * "SRINIVASA" sits at z-10 (orbiting tags at z-20 CAN pass over)  */}
+      {/*   * "SANIKOMMU" sits at z-30 (orbiting tags at z-20 CANNOT hide it) */}
       {/* =================================================================== */}
       <section
         id="hero"
-        className="relative z-10 pt-24 pb-24 md:pt-32 md:pb-32 border-b border-[#1E1916]/10 overflow-hidden"
+        className="relative z-10 pt-24 pb-24 md:pt-32 md:pb-36 border-b border-[#1E1916]/10 overflow-hidden"
       >
-        <div className="max-w-[1440px] mx-auto px-5 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
-            {/* Left 5 Columns: Editorial Introduction */}
+        <div className="max-w-[1480px] mx-auto px-5 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 xl:gap-28 items-center">
+            {/* Right 6 Columns: Orbiting Profile Photo Arena at z-20 */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-              className="lg:col-span-5 space-y-6 z-20"
+              style={{
+                scale: heroPortraitScale,
+                x: heroPortraitX,
+                y: heroPortraitY,
+                opacity: heroPortraitOpacity,
+              }}
+              className="lg:col-span-6 relative z-20 flex justify-center lg:justify-end lg:pl-8 xl:pl-14 gpu order-first lg:order-last"
             >
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#EAE3D8] border border-[#1E1916]/15 font-mono text-xs text-[#C96541] font-extrabold">
+              <HeroCircularPortraitPhysicsArena
+                photoSrc={PROFILE_PHOTOS.camera}
+              />
+            </motion.div>
+
+            {/* Left 6 Columns: No wrapper z-index so child z-10 & z-30 interleave with right column z-20! */}
+            <div className="lg:col-span-6 space-y-7 lg:pr-6 xl:pr-10 order-last lg:order-first">
+              <div className="relative z-10 inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#EAE3D8] border border-[#1E1916]/15 font-mono text-xs text-[#C96541] font-extrabold">
                 <span className="w-2 h-2 rounded-full bg-[#C96541] animate-ping" />
                 PERSONAL DEVELOPER PORTFOLIO • CLASS OF 2027
               </div>
 
-              <div className="space-y-2">
-                <p className="font-mono text-sm md:text-base text-[#6E655F] font-bold uppercase tracking-widest">
+              <div className="space-y-3">
+                <p className="relative z-10 font-mono text-sm md:text-base text-[#6E655F] font-bold uppercase tracking-widest">
                   HI THERE, I&apos;M
                 </p>
                 <h1 className="display-hero font-extrabold uppercase text-[#1E1916]">
-                  SRINIVASA REDDY{" "}
-                  <span className="text-[#C96541]">SANIKOMMU</span>
+                  {/* First name at z-10: orbiting tags (z-20) CAN pass in front of SRINIVASA */}
+                  <span
+                    data-mascot-target="true"
+                    className="relative z-10 inline-block mr-3"
+                  >
+                    SRINIVASA REDDY
+                  </span>
+                  <br className="hidden sm:block" />
+                  {/* Last name at z-30: strictly above orbiting tags (z-20) so tags NEVER hide SANIKOMMU */}
+                  <span className="relative z-30 inline-block mt-1">
+                    <ReelHighlight
+                      tone="terracotta"
+                      variant="underline"
+                      isHeading
+                      delay={0.2}
+                      className="text-[#C96541]"
+                    >
+                      SANIKOMMU
+                    </ReelHighlight>
+                  </span>
                 </h1>
               </div>
 
-              <p className="text-base md:text-lg text-[#6E655F] font-body font-medium leading-relaxed">
+              <p className="relative z-30 text-base md:text-lg text-[#6E655F] font-body font-medium leading-relaxed">
                 I&apos;m a{" "}
-                <strong className="text-[#1E1916] font-extrabold">
+                <ReelHighlight tone="terracotta" delay={0.25}>
                   Backend Developer &amp; AI/ML Engineer
-                </strong>{" "}
+                </ReelHighlight>{" "}
                 studying B.Tech CSE (AI &amp; ML) at{" "}
                 <strong className="text-[#1E1916] font-extrabold">
                   R.V.R. &amp; J.C. College of Engineering
                 </strong>
                 . I engineer high-speed, production-grade systems—from{" "}
-                <span className="text-[#C96541] font-bold underline decoration-[#C96541]/40 underline-offset-4">
+                <ReelHighlight tone="linen" delay={0.45}>
                   Stripe Connect marketplaces
-                </span>{" "}
+                </ReelHighlight>{" "}
                 and{" "}
-                <span className="text-[#1E1916] font-bold underline decoration-[#1E1916]/30 underline-offset-4">
+                <ReelHighlight tone="sage" delay={0.65}>
                   35% faster MongoDB APIs
-                </span>{" "}
+                </ReelHighlight>{" "}
                 to{" "}
-                <span className="text-[#1E1916] font-bold">
+                <ReelHighlight
+                  tone="terracotta"
+                  variant="underline"
+                  delay={0.85}
+                >
                   stateful LangGraph AI agents
-                </span>
+                </ReelHighlight>
                 .
               </p>
 
               {/* Quick Impact Counters */}
-              <div className="grid grid-cols-3 gap-3 pt-2">
+              <div className="relative z-30 grid grid-cols-3 gap-3.5 pt-2">
                 <div className="p-4 rounded-2xl surface-card">
                   <div className="font-display text-2xl md:text-3xl font-extrabold text-[#C96541]">
                     35%
@@ -1987,7 +3251,7 @@ export default function App() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+              <div className="relative z-30 flex flex-wrap items-center gap-3.5 pt-2">
                 <button
                   onClick={() => scrollToSection("works")}
                   className="px-6 py-3.5 rounded-2xl bg-[#C96541] text-[#F4F0EA] font-mono text-xs font-extrabold uppercase tracking-wider hover:bg-[#1E1916] transition-colors flex items-center gap-2 shadow-lg shadow-[#C96541]/25"
@@ -2019,22 +3283,7 @@ export default function App() {
                   <Linkedin className="w-4 h-4" />
                 </a>
               </div>
-            </motion.div>
-
-            {/* Right 7 Columns: Expanded Right-Aligned Orbital & Elastic Bounce Physics Arena */}
-            <motion.div
-              style={{
-                scale: heroPortraitScale,
-                x: heroPortraitX,
-                y: heroPortraitY,
-                opacity: heroPortraitOpacity,
-              }}
-              className="lg:col-span-7 flex justify-end lg:pr-2 gpu"
-            >
-              <HeroCircularPortraitPhysicsArena
-                photoSrc={PROFILE_PHOTOS.camera}
-              />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -2057,12 +3306,27 @@ export default function App() {
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#C96541] font-extrabold block mb-2">
                 // CHAPTER 02 • SELECTED PROJECTS &amp; ARCHITECTURE
               </span>
-              <h2 className="display-section font-extrabold uppercase text-[#1E1916]">
-                My Works
+              <h2
+                data-mascot-target="true"
+                className="display-section font-extrabold uppercase text-[#1E1916]"
+              >
+                My{" "}
+                <ReelHighlight
+                  tone="terracotta"
+                  variant="underline"
+                  isHeading
+                  delay={0.15}
+                >
+                  Works
+                </ReelHighlight>
               </h2>
             </div>
             <p className="text-sm text-[#6E655F] max-w-md font-medium">
-              Every project below solves a real engineering problem. Click any card to inspect its architecture workflow and code implementation.
+              Every project below solves a{" "}
+              <ReelHighlight tone="linen" delay={0.2}>
+                real engineering problem
+              </ReelHighlight>
+              . Click any card to inspect its architecture workflow and code implementation.
             </p>
           </motion.div>
 
@@ -2093,10 +3357,20 @@ export default function App() {
                   </div>
 
                   <div>
-                    <h3 className="font-display text-2xl md:text-3xl font-extrabold text-[#1E1916] group-hover:text-[#C96541] transition-colors">
-                      {project.title}
+                    <h3
+                      data-mascot-target="true"
+                      className="font-display text-2xl md:text-3xl font-extrabold text-[#1E1916] group-hover:text-[#C96541] transition-colors"
+                    >
+                      <ReelHighlight
+                        tone={idx % 2 === 0 ? "terracotta" : "sage"}
+                        variant="underline"
+                        isHeading
+                        delay={0.18}
+                      >
+                        {project.title}
+                      </ReelHighlight>
                     </h3>
-                    <p className="font-mono text-xs font-bold text-[#6E655F] mt-1">
+                    <p className="font-mono text-xs font-bold text-[#6E655F] mt-2">
                       {project.tagline}
                     </p>
                   </div>
@@ -2162,12 +3436,31 @@ export default function App() {
                   SIMULATION ONLY • DOES NOT RESEMBLE ACTUAL BEHAVIOUR
                 </span>
               </div>
-              <h2 className="display-section font-extrabold uppercase text-[#1E1916]">
-                Test My Systems Live
+              <h2
+                data-mascot-target="true"
+                className="display-section font-extrabold uppercase text-[#1E1916]"
+              >
+                Test My{" "}
+                <ReelHighlight
+                  tone="sage"
+                  variant="underline"
+                  isHeading
+                  delay={0.18}
+                >
+                  Systems Live
+                </ReelHighlight>
               </h2>
             </div>
             <p className="text-sm text-[#6E655F] max-w-md font-medium">
-              Interactive frontend simulations of OrderNow&apos;s Stripe Connect split-math, InsureAI&apos;s regression weights, and the LangGraph score router.
+              Interactive frontend simulations of OrderNow&apos;s{" "}
+              <ReelHighlight tone="terracotta" delay={0.2}>
+                Stripe Connect split-math
+              </ReelHighlight>
+              , InsureAI&apos;s regression weights, and the{" "}
+              <ReelHighlight tone="sage" variant="underline" delay={0.35}>
+                LangGraph score router
+              </ReelHighlight>
+              .
             </p>
           </motion.div>
 
@@ -2193,11 +3486,30 @@ export default function App() {
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#C96541] font-extrabold block">
               // CHAPTER 04 • STEP-BY-STEP ROADMAP (2021 — 2027)
             </span>
-            <h2 className="display-section font-extrabold uppercase text-[#1E1916]">
-              My Journey &amp; Timeline
+            <h2
+              data-mascot-target="true"
+              className="display-section font-extrabold uppercase text-[#1E1916]"
+            >
+              My Journey &amp;{" "}
+              <ReelHighlight
+                tone="terracotta"
+                variant="underline"
+                isHeading
+                delay={0.18}
+              >
+                Timeline
+              </ReelHighlight>
             </h2>
             <p className="text-sm text-[#6E655F] font-medium">
-              Every milestone that shaped me as a software engineer—from my 95% MPC foundation to building production Node.js &amp; AI systems.
+              Every milestone that shaped me as a software engineer—from my{" "}
+              <ReelHighlight tone="terracotta" delay={0.2}>
+                95% MPC foundation
+              </ReelHighlight>{" "}
+              to building{" "}
+              <ReelHighlight tone="sage" variant="underline" delay={0.35}>
+                production Node.js &amp; AI systems
+              </ReelHighlight>
+              .
             </p>
           </motion.div>
 
@@ -2233,10 +3545,20 @@ export default function App() {
                     </div>
 
                     <div>
-                      <h3 className="font-display text-2xl md:text-3xl font-extrabold text-[#1E1916]">
-                        {m.title}
+                      <h3
+                        data-mascot-target="true"
+                        className="font-display text-2xl md:text-3xl font-extrabold text-[#1E1916]"
+                      >
+                        <ReelHighlight
+                          tone={idx % 2 === 0 ? "linen" : "terracotta"}
+                          variant="underline"
+                          isHeading
+                          delay={0.15}
+                        >
+                          {m.title}
+                        </ReelHighlight>
                       </h3>
-                      <p className="font-mono text-xs md:text-sm text-[#6E655F] font-bold mt-1">
+                      <p className="font-mono text-xs md:text-sm text-[#6E655F] font-bold mt-2">
                         {m.place}
                       </p>
                     </div>
@@ -2281,12 +3603,31 @@ export default function App() {
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#C96541] font-extrabold block mb-2">
                 // CHAPTER 05 • COMPETITIONS, HONORS &amp; VERIFIED CREDENTIALS
               </span>
-              <h2 className="display-section font-extrabold uppercase text-[#1E1916]">
-                Achievements &amp; Certifications
+              <h2
+                data-mascot-target="true"
+                className="display-section font-extrabold uppercase text-[#1E1916]"
+              >
+                Achievements &amp;{" "}
+                <ReelHighlight
+                  tone="linen"
+                  variant="marker"
+                  isHeading
+                  delay={0.18}
+                >
+                  Certifications
+                </ReelHighlight>
               </h2>
             </div>
             <p className="text-sm text-[#6E655F] max-w-md font-medium">
-              Spotlight 1st Prize victories in AI &amp; Automation competitions alongside verified industry certifications.
+              Spotlight{" "}
+              <ReelHighlight tone="terracotta" delay={0.2}>
+                1st Prize victories
+              </ReelHighlight>{" "}
+              in AI &amp; Automation competitions alongside{" "}
+              <ReelHighlight tone="sage" variant="underline" delay={0.35}>
+                verified industry certifications
+              </ReelHighlight>
+              .
             </p>
           </motion.div>
 
@@ -2336,8 +3677,18 @@ export default function App() {
                         <span className="font-mono text-xs font-bold text-[#C96541] block">
                           {win.category}
                         </span>
-                        <h3 className="font-display text-2xl md:text-3xl font-extrabold text-[#1E1916] mt-1">
-                          {win.title}
+                        <h3
+                          data-mascot-target="true"
+                          className="font-display text-2xl md:text-3xl font-extrabold text-[#1E1916] mt-1"
+                        >
+                          <ReelHighlight
+                            tone={idx === 0 ? "terracotta" : "sage"}
+                            variant="underline"
+                            isHeading
+                            delay={0.2}
+                          >
+                            {win.title}
+                          </ReelHighlight>
                         </h3>
                       </div>
 
@@ -2477,11 +3828,30 @@ export default function App() {
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#C96541] font-extrabold block">
               // CHAPTER 06 • LET&apos;S CONNECT
             </span>
-            <h2 className="display-section font-extrabold uppercase text-[#1E1916]">
-              Ready to Build Together?
+            <h2
+              data-mascot-target="true"
+              className="display-section font-extrabold uppercase text-[#1E1916]"
+            >
+              Ready to{" "}
+              <ReelHighlight
+                tone="terracotta"
+                variant="underline"
+                isHeading
+                delay={0.18}
+              >
+                Build Together?
+              </ReelHighlight>
             </h2>
             <p className="text-sm text-[#6E655F] max-w-xl font-medium">
-              Whether it&apos;s a software engineering role, backend architecture challenge, or AI project—reach out anytime.
+              Whether it&apos;s a{" "}
+              <ReelHighlight tone="terracotta" delay={0.2}>
+                software engineering role
+              </ReelHighlight>
+              , backend architecture challenge, or{" "}
+              <ReelHighlight tone="sage" variant="underline" delay={0.35}>
+                AI project
+              </ReelHighlight>
+              —reach out anytime.
             </p>
           </div>
 
