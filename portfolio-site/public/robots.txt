@@ -1,0 +1,44 @@
+# robots.txt — Srinivasa Reddy Sanikommu Portfolio
+# https://srinivasa-reddy.is-a.dev/
+# Generated: 2026-11-11
+
+# Allow all legitimate search engine crawlers
+User-agent: *
+Allow: /
+
+# Allow Googlebot explicitly (with assets)
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Allow Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Allow Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Allow LinkedIn crawler (for og:image preview)
+User-agent: LinkedInBot
+Allow: /
+
+# Allow Facebook crawler (for Open Graph)
+User-agent: facebookexternalhit
+Allow: /
+
+# Allow Twitter/X crawler
+User-agent: Twitterbot
+Allow: /
+
+# Block nothing else — this is a fully public portfolio
+
+# Sitemap location
+Sitemap: https://srinivasa-reddy.is-a.dev/sitemap.xml
+

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#F4F0EA"/>
+
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M 52 0 L 0 0 0 52" fill="none" stroke="rgba(30,25,22,0.04)" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="75%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="rgba(201,101,65,0.12)"/>
+      <stop offset="100%" stop-color="rgba(244,240,234,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Left accent bar -->
+  <rect x="80" y="140" width="5" height="350" rx="3" fill="#C96541"/>
+
+  <!-- Badge -->
+  <rect x="108" y="140" width="310" height="34" rx="17" fill="#EAE3D8" stroke="rgba(30,25,22,0.12)" stroke-width="1"/>
+  <circle cx="130" cy="157" r="6" fill="#C96541"/>
+  <text x="148" y="162" font-family="monospace" font-size="13" font-weight="700" fill="#C96541" letter-spacing="2">PERSONAL DEVELOPER PORTFOLIO</text>
+
+  <!-- Name -->
+  <text x="108" y="250" font-family="system-ui, sans-serif" font-size="68" font-weight="800" fill="#1E1916" letter-spacing="-2">SRINIVASA REDDY</text>
+  <text x="108" y="330" font-family="system-ui, sans-serif" font-size="68" font-weight="800" fill="#C96541" letter-spacing="-2">SANIKOMMU</text>
+
+  <!-- Role -->
+  <text x="108" y="395" font-family="system-ui, sans-serif" font-size="26" font-weight="500" fill="#6E655F">Full Stack Developer &amp; AI/ML Engineer</text>
+
+  <!-- Divider -->
+  <rect x="108" y="425" width="600" height="1" fill="rgba(30,25,22,0.12)"/>
+
+  <!-- Tags -->
+  <rect x="108" y="448" width="130" height="30" rx="15" fill="#EAE3D8" stroke="rgba(30,25,22,0.12)" stroke-width="1"/>
+  <text x="173" y="468" font-family="monospace" font-size="12" font-weight="700" fill="#1E1916" text-anchor="middle">MERN STACK</text>
+
+  <rect x="250" y="448" width="130" height="30" rx="15" fill="#EAE3D8" stroke="rgba(30,25,22,0.12)" stroke-width="1"/>
+  <text x="315" y="468" font-family="monospace" font-size="12" font-weight="700" fill="#1E1916" text-anchor="middle">AI / ML</text>
+
+  <rect x="392" y="448" width="160" height="30" rx="15" fill="#EAE3D8" stroke="rgba(30,25,22,0.12)" stroke-width="1"/>
+  <text x="472" y="468" font-family="monospace" font-size="12" font-weight="700" fill="#1E1916" text-anchor="middle">STRIPE CONNECT</text>
+
+  <rect x="564" y="448" width="150" height="30" rx="15" fill="#EAE3D8" stroke="rgba(30,25,22,0.12)" stroke-width="1"/>
+  <text x="639" y="468" font-family="monospace" font-size="12" font-weight="700" fill="#1E1916" text-anchor="middle">LANGGRAPH AI</text>
+
+  <!-- URL -->
+  <text x="108" y="565" font-family="monospace" font-size="18" font-weight="600" fill="#6E655F">srinivasa-reddy.is-a.dev</text>
+
+  <!-- Right side orbital decoration -->
+  <circle cx="980" cy="315" r="180" fill="none" stroke="rgba(201,101,65,0.08)" stroke-width="1"/>
+  <circle cx="980" cy="315" r="130" fill="none" stroke="rgba(30,25,22,0.06)" stroke-width="1" stroke-dasharray="6 6"/>
+  <circle cx="980" cy="315" r="80" fill="rgba(201,101,65,0.06)"/>
+  <circle cx="980" cy="315" r="50" fill="rgba(234,227,216,0.8)" stroke="rgba(30,25,22,0.1)" stroke-width="1"/>
+  <text x="980" y="325" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#C96541" text-anchor="middle">SRS</text>
+
+  <!-- Orbital dots -->
+  <circle cx="1100" cy="250" r="8" fill="#C96541" opacity="0.6"/>
+  <circle cx="860" cy="180" r="5" fill="#C96541" opacity="0.4"/>
+  <circle cx="1130" cy="380" r="6" fill="#1E1916" opacity="0.15"/>
+  <circle cx="860" cy="430" r="9" fill="#C96541" opacity="0.3"/>
+</svg>
+

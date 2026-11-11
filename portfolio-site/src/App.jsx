@@ -3267,18 +3267,20 @@ export default function App() {
                 <a
                   href="https://github.com/srinvasreddyy"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer me"
                   className="p-3.5 rounded-2xl bg-[#EAE3D8] border border-[#1E1916]/15 text-[#1E1916] hover:border-[#C96541] hover:text-[#C96541] transition-colors"
-                  title="GitHub Profile"
+                  title="Srinivasa Reddy Sanikommu on GitHub"
+                  aria-label="Srinivasa Reddy Sanikommu GitHub Profile"
                 >
                   <Github className="w-4 h-4" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/srinivasreddysanikommu2/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer me"
                   className="p-3.5 rounded-2xl bg-[#EAE3D8] border border-[#1E1916]/15 text-[#1E1916] hover:border-[#C96541] hover:text-[#C96541] transition-colors"
-                  title="LinkedIn Profile"
+                  title="Srinivasa Reddy Sanikommu on LinkedIn"
+                  aria-label="Srinivasa Reddy Sanikommu LinkedIn Profile"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
@@ -3903,8 +3905,9 @@ export default function App() {
               <a
                 href="https://github.com/srinvasreddyy"
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer me"
                 className="flex items-center justify-between text-[#1E1916] hover:text-[#C96541] border-b border-[#1E1916]/10 pb-2.5 font-extrabold"
+                aria-label="Srinivasa Reddy Sanikommu on GitHub"
               >
                 <span>github.com/srinvasreddyy</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -3912,8 +3915,9 @@ export default function App() {
               <a
                 href="https://www.linkedin.com/in/srinivasreddysanikommu2/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer me"
                 className="flex items-center justify-between text-[#1E1916] hover:text-[#C96541] pt-1 font-extrabold"
+                aria-label="Srinivasa Reddy Sanikommu on LinkedIn"
               >
                 <span>linkedin.com/in/srinivasreddysanikommu2</span>
                 <ArrowUpRight className="w-4 h-4" />
